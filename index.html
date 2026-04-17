@@ -6,91 +6,9 @@
     <title>ACV Intelligence | Hub de Dados</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        :root {
-            --acv-purple: #9d4edd;
-            --acv-cyan: #00d4ff;
-        }
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #000000;
-            color: #e2e8f0;
-            overflow: auto; /* Scroll liberado inicialmente */
-            scroll-behavior: smooth;
-        }
-        /* Estilo da Tela de Login (Modal) */
-        #login-screen {
-            position: fixed;
-            inset: 0;
-            z-index: 100;
-            background: rgba(0, 0, 0, 0.9); /* Fundo escurecido */
-            display: none; /* Escondido inicialmente */
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(10px);
-            transition: opacity 0.5s ease;
-        }
-        .login-box {
-            width: 100%;
-            max-width: 400px;
-            padding: 40px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-        }
-        .input-field {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            padding: 12px 16px;
-            width: 100%;
-            border-radius: 8px;
-            margin-bottom: 16px;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-        .input-field:focus {
-            border-color: var(--acv-cyan);
-        }
-        /* Efeitos do Site */
-        .text-gradient {
-            background: linear-gradient(135deg, var(--acv-purple), var(--acv-cyan));
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .bg-gradient-acv {
-            background: linear-gradient(135deg, var(--acv-purple), var(--acv-cyan));
-        }
-        .glass {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .logo-glow {
-            filter: drop-shadow(0 0 8px rgba(157, 78, 221, 0.4));
-        }
-        .hero-mesh {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(157, 78, 221, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
-            z-index: -1;
-        }
-        .grid-lines {
-            background-size: 60px 60px;
-            background-image: linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
-        }
-        .card-portal:hover {
-            border-color: var(--acv-cyan);
-            transform: translateY(-5px);
-            transition: all 0.3s ease;
-        }
-    </style>
+    <style></style>
 </head>
 <body class="grid-lines">
 
@@ -130,6 +48,9 @@
                         <div class="absolute right-0 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                             <div class="glass border border-white/10 w-56 flex flex-col shadow-2xl">
                                 <a href="#portal" class="px-5 py-4 hover:bg-white/5 hover:text-cyan-400 transition border-b border-white/5 uppercase font-bold">Dashboards</a>
+                                <button onclick="openSubHub('equipe')" class="px-5 py-4 hover:bg-white/5 hover:text-cyan-400 transition border-b border-white/5 uppercase font-bold text-left">
+            Nossa Equipe
+        </button>
                                 <a href="#areas" class="px-5 py-4 hover:bg-white/5 hover:text-white transition border-b border-white/5 uppercase font-bold">Áreas</a>
                                 <a href="https://forms.office.com/r/vKt86dw2ma" target="_blank" class="px-5 py-4 hover:bg-white/5 hover:text-white transition border-b border-white/5 uppercase font-bold italic">Solicitar Dados</a>
                                 <a href="URL FLUXOGRAMA" target="_blank" class="px-5 py-4 hover:bg-white/5 hover:text-white transition uppercase font-bold italic">Fluxograma</a>
@@ -585,84 +506,105 @@
             </div>
         </div>
     </div>
+    <!-- #################################################################### -->
+    <!-- NOVA SEÇÃO: SUB-HUB EQUIPE (Fica invisível até ser chamado) -->
+    <!-- #################################################################### -->
+    <div id="subhub-equipe" class="hidden min-h-screen pt-32 pb-20 px-6 relative z-10 text-left">
+        <div class="hero-mesh"></div>
+        <div class="max-w-7xl mx-auto">
+            <!-- Header -->
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div>
+                    <button onclick="closeSubHub('equipe')" class="text-cyan-400 text-[10px] font-mono uppercase tracking-[0.4em] mb-4 flex items-center gap-2 hover:translate-x-[-5px] transition-all">
+                        <i data-lucide="arrow-left" class="w-3 h-3"></i> Voltar ao Menu Principal
+                    </button>
+                    <h2 class="text-5xl font-extrabold text-white uppercase tracking-tighter italic">Nossa <span class="text-gradient">Equipe</span></h2>
+                    <p class="text-gray-500 mt-2 font-mono text-[12px] uppercase tracking-widest">Os especialistas por trás da inteligência ACV</p>
+                </div>
+            </div>
 
-    <script>
-        lucide.createIcons();
-        let targetArea = ""; // Variável global para saber qual área foi clicada
-
-        // CONFIGURAÇÃO DE ACESSOS POR ÁREA
-        const acessos = {
-            'juridico':   { user: 'acv.jur',   pass: 'jur123' },
-            'financeiro': { user: 'acv.fin',   pass: 'fin456' },
-            'rh':         { user: 'acv.rh',    pass: 'rh789' },
-            'diretoria':  { user: 'acv.diret', pass: 'master2026' }
-        };
-
-        // 1. Abre o Modal de Login e registra qual área quer acessar
-        function requestLogin(area) {
-            targetArea = area;
-            document.getElementById('login-screen').style.display = 'flex';
-            document.body.style.overflow = 'hidden'; 
-            document.getElementById('username').value = ""; // Limpa campos
-            document.getElementById('password').value = "";
-        }
-
-        // 2. Valida o login específico para a área selecionada
-        function validateLogin() {
-            const user = document.getElementById('username').value;
-            const pass = document.getElementById('password').value;
-            const errorMsg = document.getElementById('error-msg');
-            const loginScreen = document.getElementById('login-screen');
-            const siteContent = document.getElementById('site-content');
-
-            // Verifica se o usuário e senha batem com a área guardada no targetArea
-            if (user === acessos[targetArea].user && pass === acessos[targetArea].pass) {
+            <!-- GRID DA EQUIPE -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                loginScreen.style.display = 'none';
-                siteContent.style.display = 'none'; 
-                
-                // Abre o Hub específico
-                if(targetArea === 'juridico') {
-                    document.getElementById('subhub-juridico').classList.remove('hidden');
-                } else if(targetArea === 'financeiro') {
-                    document.getElementById('subhub-financeiro').classList.remove('hidden');
-                } else if(targetArea === 'rh') {
-                    document.getElementById('subhub-rh').classList.remove('hidden');
-                } else if(targetArea === 'diretoria') {
-                    document.getElementById('subhub-diretoria').classList.remove('hidden');
-                }
-                
-                window.scrollTo(0, 0);
-            } else {
-                // Erro se não bater com a senha daquela área específica
-                errorMsg.classList.remove('hidden');
-                document.querySelector('.login-box').animate([{ transform: 'translateX(-5px)' }, { transform: 'translateX(5px)' }], { duration: 100, iterations: 3 });
-            }
-        }
+                <!-- Jhenny Mugart -->
+                <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col items-center text-center">
+                    <div class="w-20 h-20 rounded-full bg-gradient-acv p-1 mb-6 logo-glow">
+                        <div class="w-full h-full rounded-full bg-black flex items-center justify-center text-xl font-bold text-white">JM</div>
+                    </div>
+                    <h3 class="text-white font-bold uppercase text-xl italic">Jhenny Mugart</h3>
+                    <p class="text-cyan-400 font-mono text-[10px] uppercase tracking-widest mb-4">Coordenadora do Núcleo</p>
+                    <p class="text-[12px] text-gray-500 mb-6 leading-relaxed">Liderança estratégica e governança. Responsável pela visão macro e alinhamento da inteligência com os objetivos do escritório.</p>
+                    <div class="flex flex-wrap justify-center gap-2 mb-8">
+                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[9px] text-gray-400 uppercase">Gestão de Projetos</span>
+                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[9px] text-gray-400 uppercase">Estratégia</span>
+                    </div>
+                    <a href="LINK_LINKEDIN_JHENNY" target="_blank" class="text-[10px] text-gray-500 hover:text-white transition uppercase tracking-widest underline">LinkedIn</a>
+                </div>
 
-        // 3. Fecha o Sub-Hub e volta ao menu principal
-        function closeSubHub(area) {
-            const idMap = {
-                'juridico': 'subhub-juridico',
-                'financeiro': 'subhub-financeiro',
-                'rh': 'subhub-rh',
-                'diretoria': 'subhub-diretoria'
-            };
-            
-            document.getElementById(idMap[area]).classList.add('hidden');
-            document.getElementById('site-content').style.display = 'block';
-            document.body.style.overflow = 'auto';
-            window.scrollTo(0, 0);
-        }
+                <!-- Lucas Amado -->
+                <div class="glass p-8 rounded-xl border-2 border-cyan-500/30 card-portal flex flex-col items-center text-center relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-cyan-500 text-black text-[8px] font-bold px-3 py-1 uppercase tracking-tighter">Project Creator</div>
+                    <div class="w-20 h-20 rounded-full bg-gradient-acv p-1 mb-6 logo-glow">
+                        <div class="w-full h-full rounded-full bg-black flex items-center justify-center text-xl font-bold text-white">LA</div>
+                    </div>
+                    <h3 class="text-white font-bold uppercase text-xl italic">Lucas Amado</h3>
+                    <p class="text-cyan-400 font-mono text-[10px] uppercase tracking-widest mb-4">Business Intelligence</p>
+                    <p class="text-[12px] text-gray-500 mb-6 leading-relaxed">Idealizador do ecossistema digital ACV. Especialista em arquitetura de BI, visualização de dados e desenvolvimento de soluções tech.</p>
+                    <div class="flex flex-wrap justify-center gap-2 mb-8">
+                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[9px] text-gray-400 uppercase">Power BI</span>
+                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[9px] text-gray-400 uppercase">Dev Web</span>
+                    </div>
+                    <a href="LINK_LINKEDIN_LUCAS" target="_blank" class="text-[10px] text-gray-500 hover:text-white transition uppercase tracking-widest underline">LinkedIn</a>
+                </div>
 
-        // 4. Cancelar login
-        function cancelLogin() {
-            document.getElementById('login-screen').style.display = 'none';
-            document.body.style.overflow = 'auto';
-            document.getElementById('error-msg').classList.add('hidden');
-        }
+                <!-- Maicon Cardoso -->
+                <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col items-center text-center">
+                    <div class="w-20 h-20 rounded-full bg-gradient-acv p-1 mb-6 logo-glow">
+                        <div class="w-full h-full rounded-full bg-black flex items-center justify-center text-xl font-bold text-white">MC</div>
+                    </div>
+                    <h3 class="text-white font-bold uppercase text-xl italic">Maicon Cardoso</h3>
+                    <p class="text-cyan-400 font-mono text-[10px] uppercase tracking-widest mb-4">Analista Estratégico</p>
+                    <p class="text-[12px] text-gray-500 mb-6 leading-relaxed">Especialista em análise de performance e ROI. Transforma métricas brutas em planos de ação táticos para o crescimento do negócio.</p>
+                    <div class="flex flex-wrap justify-center gap-2 mb-8">
+                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[9px] text-gray-400 uppercase">KPIs Jurídicos</span>
+                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[9px] text-gray-400 uppercase">Market Intelligence</span>
+                    </div>
+                    <a href="LINK_LINKEDIN_MAICON" target="_blank" class="text-[10px] text-gray-500 hover:text-white transition uppercase tracking-widest underline">LinkedIn</a>
+                </div>
 
-        document.addEventListener('keypress', function (e) { if (e.key === 'Enter') validateLogin(); });
-    </script>
+                <!-- Gabriel Petrallas -->
+                <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col items-center text-center">
+                    <div class="w-20 h-20 rounded-full bg-gradient-acv p-1 mb-6 logo-glow">
+                        <div class="w-full h-full rounded-full bg-black flex items-center justify-center text-xl font-bold text-white">GP</div>
+                    </div>
+                    <h3 class="text-white font-bold uppercase text-xl italic">Gabriel Petrallas</h3>
+                    <p class="text-cyan-400 font-mono text-[10px] uppercase tracking-widest mb-4">Analista de TI</p>
+                    <p class="text-[12px] text-gray-500 mb-6 leading-relaxed">Focado em integração de sistemas e segurança. Garante que os pipelines de dados fluam com integridade e proteção total.</p>
+                    <div class="flex flex-wrap justify-center gap-2 mb-8">
+                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[9px] text-gray-400 uppercase">Integrações</span>
+                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[9px] text-gray-400 uppercase">Segurança</span>
+                    </div>
+                    <a href="LINK_LINKEDIN_GABRIEL" target="_blank" class="text-[10px] text-gray-500 hover:text-white transition uppercase tracking-widest underline">LinkedIn</a>
+                </div>
+
+                <!-- Leonardo Muraro -->
+                <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col items-center text-center">
+                    <div class="w-20 h-20 rounded-full bg-gradient-acv p-1 mb-6 logo-glow">
+                        <div class="w-full h-full rounded-full bg-black flex items-center justify-center text-xl font-bold text-white">LM</div>
+                    </div>
+                    <h3 class="text-white font-bold uppercase text-xl italic text-gradient">Leonardo Muraro</h3>
+                    <p class="text-cyan-400 font-mono text-[10px] uppercase tracking-widest mb-4">TI e Infraestrutura</p>
+                    <p class="text-[12px] text-gray-500 mb-6 leading-relaxed">Garante a disponibilidade contínua dos sistemas e a robustez da infraestrutura que sustenta a operação analítica.</p>
+                    <div class="flex flex-wrap justify-center gap-2 mb-8">
+                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[9px] text-gray-400 uppercase">Sistemas</span>
+                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[9px] text-gray-400 uppercase">Infraestrutura</span>
+                    </div>
+                    <a href="LINK_LINKEDIN_LEONARDO" target="_blank" class="text-[10px] text-gray-500 hover:text-white transition uppercase tracking-widest underline">LinkedIn</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
