@@ -74,7 +74,8 @@ const acessos = {
     'juridico':   { user: 'acv.jur',   pass: 'jur123' },
     'financeiro': { user: 'acv.fin',   pass: 'fin456' },
     'rh':         { user: 'acv.rh',    pass: 'rh789' },
-    'diretoria':  { user: 'acv.diret', pass: 'master2026' }
+    'diretoria':  { user: 'acv.diret', pass: 'master2026' },
+    'clientes':   { user: 'cliente.acv', pass: 'acv2025' } // ADICIONE ESTA LINHA
 };
 
 // Abre o Modal de Login para áreas restritas
@@ -89,17 +90,25 @@ function requestLogin(area) {
 
 // Abre áreas DIRETAMENTE (como a Equipe, se você não quiser senha)
 function openSubHub(area) {
+    // 1. Esconde o site principal
     document.getElementById('site-content').style.display = 'none';
     
-    if(area === 'juridico') document.getElementById('subhub-juridico').classList.remove('hidden');
-    if(area === 'financeiro') document.getElementById('subhub-financeiro').classList.remove('hidden');
-    if(area === 'rh') document.getElementById('subhub-rh').classList.remove('hidden');
-    if(area === 'diretoria') document.getElementById('subhub-diretoria').classList.remove('hidden');
-    
-    if(area === 'equipe') {
-        document.getElementById('subhub-equipe').classList.remove('hidden');
-        renderEquipe(); // Desenha os cards quando abre
+    // 2. Esconde TODOS os sub-hubs antes (para não sobrepor)
+    const hubs = ['juridico', 'financeiro', 'rh', 'diretoria', 'equipe', 'clientes'];
+    hubs.forEach(h => {
+        const el = document.getElementById(`subhub-${h}`);
+        if(el) el.classList.add('hidden');
+    });
+
+    // 3. Mostra apenas o que foi clicado
+    const targetEl = document.getElementById(`subhub-${area}`);
+    if(targetEl) {
+        targetEl.classList.remove('hidden');
     }
+
+    // 4. Se for equipe, desenha os cards
+    if(area === 'equipe') renderEquipe();
+    
     window.scrollTo(0, 0);
 }
 
@@ -125,7 +134,8 @@ function closeSubHub(area) {
         'financeiro': 'subhub-financeiro',
         'rh': 'subhub-rh',
         'diretoria': 'subhub-diretoria',
-        'equipe': 'subhub-equipe'
+        'equipe': 'subhub-equipe',
+        'clientes': 'subhub-clientes' // ADICIONE ESTA LINHA
     };
     
     document.getElementById(idMap[area]).classList.add('hidden');
