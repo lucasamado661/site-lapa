@@ -48,6 +48,9 @@
                         <div class="absolute right-0 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                             <div class="glass border border-white/10 w-56 flex flex-col shadow-2xl">
                                 <a href="#portal" class="px-5 py-4 hover:bg-white/5 hover:text-cyan-400 transition border-b border-white/5 uppercase font-bold">Dashboards</a>
+                                <button onclick="openSubHub('equipe')" class="px-5 py-4 hover:bg-white/5 hover:text-cyan-400 transition border-b border-white/5 uppercase font-bold text-left">
+            Nossa Equipe
+        </button>
                                 <a href="#areas" class="px-5 py-4 hover:bg-white/5 hover:text-white transition border-b border-white/5 uppercase font-bold">Áreas</a>
                                 <a href="https://forms.office.com/r/vKt86dw2ma" target="_blank" class="px-5 py-4 hover:bg-white/5 hover:text-white transition border-b border-white/5 uppercase font-bold italic">Solicitar Dados</a>
                                 <a href="URL FLUXOGRAMA" target="_blank" class="px-5 py-4 hover:bg-white/5 hover:text-white transition uppercase font-bold italic">Fluxograma</a>
@@ -59,7 +62,7 @@
             </div>
         </nav>
 
-        <!-- Hero --> <!--Comentário teste-->
+        <!-- Hero -->
         <section class="relative min-h-screen flex flex-col items-center justify-center pt-20">
             <div class="hero-mesh"></div>
             <div class="max-w-5xl px-6 text-center">
@@ -498,6 +501,105 @@
                         <p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Indicadores de produtividade e volume de acionamentos diários.</p>
                     </div>
                     <a href="https://app.powerbi.com/view?r=eyJrIjoiYmUzNWRjMWEtNTIyYS00ZDA0LWExZDktMGJmNDFjMTgxZjBiIiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar Painel</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- #################################################################### -->
+    <!-- NOVA SEÇÃO: SUB-HUB EQUIPE (Fica invisível até ser chamado) -->
+    <!-- #################################################################### -->
+    <div id="subhub-equipe" class="hidden min-h-screen pt-32 pb-20 px-6 relative z-10 text-left">
+        <div class="hero-mesh"></div>
+        <div class="max-w-7xl mx-auto">
+            <!-- Header -->
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div>
+                    <button onclick="closeSubHub('equipe')" class="text-cyan-400 text-[10px] font-mono uppercase tracking-[0.4em] mb-4 flex items-center gap-2 hover:translate-x-[-5px] transition-all">
+                        <i data-lucide="arrow-left" class="w-3 h-3"></i> Voltar ao Menu Principal
+                    </button>
+                    <h2 class="text-5xl font-extrabold text-white uppercase tracking-tighter italic">Nossa <span class="text-gradient">Equipe</span></h2>
+                    <p class="text-gray-500 mt-2 font-mono text-[12px] uppercase tracking-widest">Os especialistas por trás da inteligência ACV</p>
+                </div>
+            </div>
+
+            <!-- GRID DA EQUIPE -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Jhenny Mugart -->
+                <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col items-center text-center">
+                    <div class="w-20 h-20 rounded-full bg-gradient-acv p-1 mb-6 logo-glow">
+                        <div class="w-full h-full rounded-full bg-black flex items-center justify-center text-xl font-bold text-white">JM</div>
+                    </div>
+                    <h3 class="text-white font-bold uppercase text-xl italic">Jhenny Mugart</h3>
+                    <p class="text-cyan-400 font-mono text-[10px] uppercase tracking-widest mb-4">Coordenadora do Núcleo</p>
+                    <p class="text-[12px] text-gray-500 mb-6 leading-relaxed">Liderança estratégica e governança. Responsável pela visão macro e alinhamento da inteligência com os objetivos do escritório.</p>
+                    <div class="flex flex-wrap justify-center gap-2 mb-8">
+                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[9px] text-gray-400 uppercase">Gestão de Projetos</span>
+                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[9px] text-gray-400 uppercase">Estratégia</span>
+                    </div>
+                    <a href="LINK_LINKEDIN_JHENNY" target="_blank" class="text-[10px] text-gray-500 hover:text-white transition uppercase tracking-widest underline">LinkedIn</a>
+                </div>
+
+                <!-- Lucas Amado -->
+                <div class="glass p-8 rounded-xl border-2 border-cyan-500/30 card-portal flex flex-col items-center text-center relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-cyan-500 text-black text-[8px] font-bold px-3 py-1 uppercase tracking-tighter">Project Creator</div>
+                    <div class="w-20 h-20 rounded-full bg-gradient-acv p-1 mb-6 logo-glow">
+                        <div class="w-full h-full rounded-full bg-black flex items-center justify-center text-xl font-bold text-white">LA</div>
+                    </div>
+                    <h3 class="text-white font-bold uppercase text-xl italic">Lucas Amado</h3>
+                    <p class="text-cyan-400 font-mono text-[10px] uppercase tracking-widest mb-4">Business Intelligence</p>
+                    <p class="text-[12px] text-gray-500 mb-6 leading-relaxed">Idealizador do ecossistema digital ACV. Especialista em arquitetura de BI, visualização de dados e desenvolvimento de soluções tech.</p>
+                    <div class="flex flex-wrap justify-center gap-2 mb-8">
+                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[9px] text-gray-400 uppercase">Power BI</span>
+                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[9px] text-gray-400 uppercase">Dev Web</span>
+                    </div>
+                    <a href="LINK_LINKEDIN_LUCAS" target="_blank" class="text-[10px] text-gray-500 hover:text-white transition uppercase tracking-widest underline">LinkedIn</a>
+                </div>
+
+                <!-- Maicon Cardoso -->
+                <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col items-center text-center">
+                    <div class="w-20 h-20 rounded-full bg-gradient-acv p-1 mb-6 logo-glow">
+                        <div class="w-full h-full rounded-full bg-black flex items-center justify-center text-xl font-bold text-white">MC</div>
+                    </div>
+                    <h3 class="text-white font-bold uppercase text-xl italic">Maicon Cardoso</h3>
+                    <p class="text-cyan-400 font-mono text-[10px] uppercase tracking-widest mb-4">Analista Estratégico</p>
+                    <p class="text-[12px] text-gray-500 mb-6 leading-relaxed">Especialista em análise de performance e ROI. Transforma métricas brutas em planos de ação táticos para o crescimento do negócio.</p>
+                    <div class="flex flex-wrap justify-center gap-2 mb-8">
+                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[9px] text-gray-400 uppercase">KPIs Jurídicos</span>
+                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[9px] text-gray-400 uppercase">Market Intelligence</span>
+                    </div>
+                    <a href="LINK_LINKEDIN_MAICON" target="_blank" class="text-[10px] text-gray-500 hover:text-white transition uppercase tracking-widest underline">LinkedIn</a>
+                </div>
+
+                <!-- Gabriel Petrallas -->
+                <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col items-center text-center">
+                    <div class="w-20 h-20 rounded-full bg-gradient-acv p-1 mb-6 logo-glow">
+                        <div class="w-full h-full rounded-full bg-black flex items-center justify-center text-xl font-bold text-white">GP</div>
+                    </div>
+                    <h3 class="text-white font-bold uppercase text-xl italic">Gabriel Petrallas</h3>
+                    <p class="text-cyan-400 font-mono text-[10px] uppercase tracking-widest mb-4">Analista de TI</p>
+                    <p class="text-[12px] text-gray-500 mb-6 leading-relaxed">Focado em integração de sistemas e segurança. Garante que os pipelines de dados fluam com integridade e proteção total.</p>
+                    <div class="flex flex-wrap justify-center gap-2 mb-8">
+                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[9px] text-gray-400 uppercase">Integrações</span>
+                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[9px] text-gray-400 uppercase">Segurança</span>
+                    </div>
+                    <a href="LINK_LINKEDIN_GABRIEL" target="_blank" class="text-[10px] text-gray-500 hover:text-white transition uppercase tracking-widest underline">LinkedIn</a>
+                </div>
+
+                <!-- Leonardo Muraro -->
+                <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col items-center text-center">
+                    <div class="w-20 h-20 rounded-full bg-gradient-acv p-1 mb-6 logo-glow">
+                        <div class="w-full h-full rounded-full bg-black flex items-center justify-center text-xl font-bold text-white">LM</div>
+                    </div>
+                    <h3 class="text-white font-bold uppercase text-xl italic text-gradient">Leonardo Muraro</h3>
+                    <p class="text-cyan-400 font-mono text-[10px] uppercase tracking-widest mb-4">TI e Infraestrutura</p>
+                    <p class="text-[12px] text-gray-500 mb-6 leading-relaxed">Garante a disponibilidade contínua dos sistemas e a robustez da infraestrutura que sustenta a operação analítica.</p>
+                    <div class="flex flex-wrap justify-center gap-2 mb-8">
+                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[9px] text-gray-400 uppercase">Sistemas</span>
+                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[9px] text-gray-400 uppercase">Infraestrutura</span>
+                    </div>
+                    <a href="LINK_LINKEDIN_LEONARDO" target="_blank" class="text-[10px] text-gray-500 hover:text-white transition uppercase tracking-widest underline">LinkedIn</a>
                 </div>
 
             </div>
