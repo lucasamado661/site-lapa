@@ -75,7 +75,7 @@ const acessos = {
     'financeiro': { user: 'acv.fin',   pass: 'fin456' },
     'rh':         { user: 'acv.rh',    pass: 'rh789' },
     'diretoria':  { user: 'acv.diret', pass: 'master2026' },
-    'clientes':   { user: 'cliente.acv', pass: 'acv2025' } // ADICIONE ESTA LINHA
+    'clientes':   { user: 'cliente.acv', pass: 'acv@2026' } // ADICIONE ESTA LINHA
 };
 
 // Abre o Modal de Login para áreas restritas
