@@ -150,3 +150,62 @@ function cancelLogin() {
 }
 
 document.addEventListener('keypress', function (e) { if (e.key === 'Enter') validateLogin(); });
+
+/* CONFIGURAÇÃO PARTICULAS ACV */
+particlesJS("particles-js", {
+  "particles": {
+    "number": { "value": 100, "density": { "enable": true, "value_area": 800 } },
+    "color": { "value": ["#00d4ff", "#9d4edd"] }, // Alterna entre Ciano e Roxo
+    "shape": { "type": "circle" },
+    "opacity": { "value": 0.4, "random": true },
+    "size": { "value": 2, "random": true },
+    "line_linked": {
+      "enable": true,
+      "distance": 150,
+      "color": "#ffffff",
+      "opacity": 0.1,
+      "width": 1
+    },
+    "move": {
+      "enable": true,
+      "speed": 1.5,
+      "direction": "none",
+      "random": true,
+      "straight": false,
+      "out_mode": "out",
+      "bounce": false
+    }
+  },
+  "interactivity": {
+    "detect_on": "canvas",
+    "events": {
+      "onhover": { "enable": true, "mode": "grab" },
+      "onclick": { "enable": true, "mode": "push" },
+      "resize": true
+    },
+    "modes": {
+      "grab": { "distance": 200, "line_linked": { "opacity": 0.5 } }
+    }
+  },
+  "retina_detect": true
+});
+
+// LÓGICA DE REVELAÇÃO AO ROLAR (SCROLL REVEAL)
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+        }
+    });
+}, {
+    threshold: 0.1 // O efeito dispara quando 10% do elemento aparece na tela
+});
+
+// Seleciona todos os elementos que devem ser revelados
+function initScrollReveal() {
+    const elements = document.querySelectorAll('.reveal');
+    elements.forEach((el) => observer.observe(el));
+}
+
+// Inicia a função
+initScrollReveal();
