@@ -441,6 +441,9 @@ body.no-scroll { overflow: hidden; }
 /* --------------------------------------------------------------------------
    13. BUSCA DE PAINÉIS
    -------------------------------------------------------------------------- */
+/* Eleva todo o bloco de busca acima dos cards (z-index do contexto de empilhamento) */
+.search-box { position: relative; z-index: 60; }
+
 .search-wrap { position: relative; }
 .search-icon {
     position: absolute;
