@@ -1,171 +1,146 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO -->
     <title>ACV Intelligence | Hub de Dados</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="description" content="Núcleo de inteligência e dados da ACV: dashboards executivos, jurimetria, automação e BI para todas as áreas do escritório.">
+    <meta name="theme-color" content="#000000">
+    <meta name="author" content="Lucas Amado">
+    <link rel="canonical" href="https://lapaintelligence.com.br/">
+
+    <!-- Open Graph / redes sociais -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="ACV Intelligence | Hub de Dados">
+    <meta property="og:description" content="Transformando dados jurídicos em poder de decisão. Dashboards, jurimetria e automação.">
+    <meta property="og:url" content="https://lapaintelligence.com.br/">
+    <meta property="og:image" content="https://lapaintelligence.com.br/logo-acv.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo-acv.png">
+    <link rel="apple-touch-icon" href="logo-acv.png">
+
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <!-- Estilos -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-    :root {
-        --acv-purple: #9d4edd;
-        --acv-cyan: #00d4ff;
-    }
-
-    body {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        background-color: #000000;
-        color: #e2e8f0;
-        overflow-x: hidden;
-        scroll-behavior: smooth;
-        margin: 0;
-    }
-
-    .grid-lines {
-        background-size: 60px 60px;
-        background-image: linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
-                          linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
-    }
-
-    #particles-js {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        z-index: -1;
-    }
-
-    /* ============================================================== */
-    /* ANIMAÇÃO DE REVELAR AO ROLAR (SCROLL REVEAL) - COLOQUE ISSO: */
-    /* ============================================================== */
-    .reveal {
-        opacity: 0;
-        transform: translateY(40px); /* Começa 40px abaixo */
-        transition: all 1s cubic-bezier(0.17, 0.55, 0.55, 1); /* Transição suave e elegante */
-    }
-
-    .reveal.active {
-        opacity: 1;
-        transform: translateY(0); /* Sobe para a posição original */
-    }
-
-    /* Delays para efeito cascata (um card após o outro) */
-    .delay-100 { transition-delay: 100ms; }
-    .delay-200 { transition-delay: 200ms; }
-    .delay-300 { transition-delay: 300ms; }
-    .delay-400 { transition-delay: 400ms; }
-    /* ============================================================== */
-
-    .text-gradient {
-    /* 1. Define as cores do gradiente */
-    background: linear-gradient(135deg, var(--acv-purple), var(--acv-cyan));
-    
-    /* 2. Faz o fundo ficar apenas atrás das letras (Versão Webkit e Padrão) */
-    -webkit-background-clip: text;
-    background-clip: text;
-    
-    /* 3. Deixa a cor real do texto transparente para o gradiente aparecer */
-    -webkit-text-fill-color: transparent;
-    color: transparent; 
-
-    /* 4. Garante que o elemento se comporte bem com o fundo */
-    display: inline-block; 
-}
-
-    .bg-gradient-acv {
-        background: linear-gradient(135deg, var(--acv-purple), var(--acv-cyan));
-    }
-
-    .glass {
-        background: rgba(255, 255, 255, 0.02);
-        backdrop-filter: blur(15px);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .logo-glow {
-        filter: drop-shadow(0 0 10px rgba(157, 78, 221, 0.5));
-    }
-</style>
-    
 </head>
 <body class="grid-lines">
- <div id="particles-js"></div>   
-
-    <!-- TELA DE LOGIN (Aparecerá apenas para o Jurídico) -->
-    <div id="login-screen">
-        <div class="login-box">
-            <button onclick="cancelLogin()" class="absolute top-4 right-4 text-gray-500 hover:text-white transition">
-                <i data-lucide="x" class="w-6 h-6"></i>
-            </button>
-            <img src="logo-acv.png" alt="ACV Logo" class="h-48 mx-auto mb-8 logo-glow">
-            <h2 class="text-white font-bold uppercase tracking-[0.3em] text-[10px] mb-8 italic">Acesso Restrito: Dashboards</h2>
-            
-            <input type="text" id="username" placeholder="Usuário" class="input-field font-mono text-sm">
-            <input type="password" id="password" placeholder="Senha" class="input-field font-mono text-sm">
-            
-            <button onclick="validateLogin()" class="w-full bg-gradient-acv text-black font-extrabold py-3 rounded-lg uppercase text-[10px] tracking-widest mt-4 hover:opacity-80 transition shadow-[0_0_20px_rgba(0,212,255,0.2)]">
-                Validar Acesso
-            </button>
-            <p id="error-msg" class="text-red-500 text-[10px] mt-4 uppercase font-bold hidden italic">Credenciais Inválidas</p>
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <div class="preloader-inner">
+            <img src="logo-acv.png" alt="ACV Intelligence">
+            <div class="preloader-ring"></div>
         </div>
     </div>
 
+    <div id="particles-js"></div>
 
+    <!-- ====================================================================
+         MODAL DE LOGIN (áreas restritas)
+         ==================================================================== -->
+    <div id="login-screen" role="dialog" aria-modal="true" aria-labelledby="login-title">
+        <div class="login-box">
+            <button onclick="cancelLogin()" aria-label="Fechar login" class="absolute top-4 right-4 text-gray-500 hover:text-white transition">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <img src="logo-acv.png" alt="ACV Intelligence" class="h-48 mx-auto mb-8 logo-glow">
+            <h2 id="login-title" class="text-white font-bold uppercase tracking-[0.3em] text-[10px] mb-8 italic">Acesso Restrito: Dashboards</h2>
 
-    <!-- CONTEÚDO DO SITE (PÚBLICO) -->
-    <div id="site-content" style="opacity: 1; transition: opacity 1s ease;">
-        
-        <!-- Nav -->
-        <nav class="fixed w-full z-50 glass border-b border-white/10">
+            <label for="username" class="sr-only">Usuário</label>
+            <input type="text" id="username" autocomplete="username" placeholder="Usuário" class="input-field font-mono text-sm">
+
+            <label for="password" class="sr-only">Senha</label>
+            <input type="password" id="password" autocomplete="current-password" placeholder="Senha" class="input-field font-mono text-sm">
+
+            <button onclick="validateLogin()" class="btn-shine w-full bg-gradient-acv text-black font-extrabold py-3 rounded-lg uppercase text-[10px] tracking-widest mt-4 hover:opacity-90 transition shadow-[0_0_20px_rgba(0,212,255,0.2)]">
+                Validar Acesso
+            </button>
+            <p id="error-msg" class="text-red-500 text-[10px] mt-4 uppercase font-bold hidden italic" role="alert">Credenciais Inválidas</p>
+        </div>
+    </div>
+
+    <!-- ====================================================================
+         CONTEÚDO PÚBLICO
+         ==================================================================== -->
+    <div id="site-content">
+
+        <!-- NAV -->
+        <nav id="main-nav" class="fixed w-full z-50 glass border-b border-white/10">
             <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-                <div class="flex items-center gap-4">
-                    <img src="logo-acv.png" alt="ACV Intelligence" class="h-20 w-auto logo-glow">
-                    <div class="h-6 w-[1px] bg-white/20 hidden sm:block"></div>
+                <a href="#top" class="flex items-center gap-4">
+                    <img src="logo-acv.png" alt="ACV Intelligence" class="nav-logo h-20 w-auto logo-glow">
+                    <span class="h-6 w-[1px] bg-white/20 hidden sm:block"></span>
                     <span class="text-[10px] font-mono tracking-[0.3em] text-gray-400 hidden sm:block uppercase">Núcleo de Inteligência e Dados</span>
-                </div>
-                <div class="hidden md:flex gap-10 text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400">
-                    <a href="#manifesto" class="hover:text-white transition">Missão</a>
+                </a>
+
+                <!-- Links desktop -->
+                <div class="hidden md:flex items-center gap-10 text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400">
+                    <a href="#manifesto" class="nav-link hover:text-white transition">Missão</a>
                     <div class="relative group">
-                        <button class="flex items-center gap-1 text-cyan-400 font-extrabold border-b border-cyan-400 hover:text-white transition uppercase">Menu <i data-lucide="chevron-down" class="w-3 h-3"></i></button>
+                        <button class="flex items-center gap-1 text-cyan-400 font-extrabold border-b border-cyan-400 hover:text-white transition uppercase">
+                            Menu <i data-lucide="chevron-down" class="w-3 h-3"></i>
+                        </button>
                         <div class="absolute right-0 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                             <div class="glass border border-white/10 w-56 flex flex-col shadow-2xl text-left">
-    <a href="#portal" class="px-5 py-4 hover:bg-white/5 hover:text-cyan-400 transition border-b border-white/5 uppercase font-bold text-left">Dashboards</a>
-    
-    <button onclick="openSubHub('equipe')" class="px-5 py-4 hover:bg-white/5 hover:text-cyan-400 transition border-b border-white/5 uppercase font-bold text-left w-full">   
-        Nossa Equipe
-    </button>
+                                <a href="#portal" class="px-5 py-4 hover:bg-white/5 hover:text-cyan-400 transition border-b border-white/5 uppercase font-bold">Dashboards</a>
+                                <button onclick="openSubHub('favoritos')" class="px-5 py-4 hover:bg-white/5 hover:text-cyan-400 transition border-b border-white/5 uppercase font-bold text-left w-full flex items-center gap-2"><i data-lucide="star" class="w-3 h-3"></i> Favoritos</button>
+                                <button onclick="openSubHub('equipe')" class="px-5 py-4 hover:bg-white/5 hover:text-cyan-400 transition border-b border-white/5 uppercase font-bold text-left w-full">Nossa Equipe</button>
+                                <button onclick="requestLogin('clientes')" class="px-5 py-4 hover:bg-white/5 hover:text-cyan-400 transition border-b border-white/5 uppercase font-bold text-left w-full">Área do Cliente</button>
+                                <a href="#areas" class="px-5 py-4 hover:bg-white/5 hover:text-white transition border-b border-white/5 uppercase font-bold">Áreas</a>
+                                <a href="http://chamados.acv" target="_blank" rel="noopener" class="px-5 py-4 hover:bg-white/5 hover:text-white transition border-b border-white/5 uppercase font-bold italic">Solicitar Dados</a>
+                                <a href="https://manualoperacionalacv.lovable.app/" target="_blank" rel="noopener" class="px-5 py-4 hover:bg-white/5 hover:text-white transition uppercase font-bold italic">Fluxograma</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    <button onclick="requestLogin('clientes')" class="px-5 py-4 hover:bg-white/5 hover:text-cyan-400 transition border-b border-white/5 uppercase font-bold text-left w-full">
-        Área do Cliente
-    </button>
-
-    <a href="#areas" class="px-5 py-4 hover:bg-white/5 hover:text-white transition border-b border-white/5 uppercase font-bold text-left">Áreas</a>
-    <a href="http://chamados.acv" target="_blank" class="px-5 py-4 hover:bg-white/5 hover:text-white transition border-b border-white/5 uppercase font-bold italic text-left">Solicitar Dados</a>
-    <a href="https://manualoperacionalacv.lovable.app/" target="_blank" class="px-5 py-4 hover:bg-white/5 hover:text-white transition uppercase font-bold italic text-left">Fluxograma</a>
-</div>
-
-
+                <!-- Botão menu mobile -->
+                <button onclick="toggleMobileMenu()" aria-label="Abrir menu" class="md:hidden text-white p-2">
+                    <i data-lucide="menu" class="w-7 h-7"></i>
+                </button>
+            </div>
         </nav>
 
-       
-        <!-- Hero -->
-        <section class="relative min-h-screen flex flex-col items-center justify-center pt-20">
+        <!-- DRAWER MOBILE -->
+        <div id="mobile-menu" class="fixed top-0 right-0 h-full w-72 z-[60] glass border-l border-white/10 md:hidden pt-24 px-6">
+            <button onclick="toggleMobileMenu(false)" aria-label="Fechar menu" class="absolute top-6 right-6 text-gray-400 hover:text-white transition">
+                <i data-lucide="x" class="w-7 h-7"></i>
+            </button>
+            <div class="flex flex-col gap-2 text-[12px] font-bold uppercase tracking-[0.2em] text-gray-300">
+                <a href="#manifesto" onclick="toggleMobileMenu(false)" class="py-3 border-b border-white/5 hover:text-cyan-400 transition">Missão</a>
+                <a href="#portal" onclick="toggleMobileMenu(false)" class="py-3 border-b border-white/5 hover:text-cyan-400 transition">Dashboards</a>
+                <button onclick="toggleMobileMenu(false); openSubHub('favoritos')" class="py-3 border-b border-white/5 hover:text-cyan-400 transition text-left flex items-center gap-2"><i data-lucide="star" class="w-4 h-4"></i> Favoritos</button>
+                <button onclick="toggleMobileMenu(false); openSubHub('equipe')" class="py-3 border-b border-white/5 hover:text-cyan-400 transition text-left">Nossa Equipe</button>
+                <button onclick="toggleMobileMenu(false); requestLogin('clientes')" class="py-3 border-b border-white/5 hover:text-cyan-400 transition text-left">Área do Cliente</button>
+                <a href="#areas" onclick="toggleMobileMenu(false)" class="py-3 border-b border-white/5 hover:text-cyan-400 transition">Áreas</a>
+                <a href="http://chamados.acv" target="_blank" rel="noopener" class="py-3 border-b border-white/5 hover:text-white transition italic">Solicitar Dados</a>
+                <a href="https://manualoperacionalacv.lovable.app/" target="_blank" rel="noopener" class="py-3 hover:text-white transition italic">Fluxograma</a>
+            </div>
+        </div>
+
+        <!-- HERO -->
+        <section id="top" class="relative min-h-screen flex flex-col items-center justify-center pt-20">
             <div class="hero-mesh"></div>
             <div class="max-w-5xl px-6 text-center">
-                <div class="inline-flex items-center gap-2 px-3 py-1 border border-white/10 rounded-full mb-8 bg-white/5">
+                <div class="reveal inline-flex items-center gap-2 px-3 py-1 border border-white/10 rounded-full mb-8 bg-white/5">
                     <span class="text-white text-[13px] font-mono tracking-widest uppercase italic">Suporte Estratégico Institucional</span>
                 </div>
-                <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-8 tracking-tighter text-white">
-                    Transformando dados jurídicos em <br><span class="text-gradient">poder de decisão.</span>
-                 </h1>
-                <p class="text-lg md:text-xl text-gray-400 mb-8 max-w-3xl mx-auto leading-relaxed">
+                <h1 class="reveal delay-100 text-5xl md:text-7xl font-extrabold leading-tight mb-8 tracking-tighter text-white">
+                    Transformando dados jurídicos em <br><span class="text-gradient-animated">poder de decisão.</span>
+                </h1>
+                <p class="reveal delay-200 text-lg md:text-xl text-gray-400 mb-8 max-w-3xl mx-auto leading-relaxed">
                     A <strong>ACV Intelligence</strong> é o núcleo de suporte analítico dedicado a potencializar todas as áreas do escritório por meio da engenharia de dados, dashboards executivos e automação.
                 </p>
-                
-                <div class="glass border border-cyan-500/20 rounded-full px-6 py-2 inline-flex items-center gap-6 mb-12">
+
+                <div class="reveal delay-300 glass border border-cyan-500/20 rounded-full px-6 py-2 inline-flex items-center gap-6 mb-12">
                     <div class="flex items-center gap-2">
                         <span class="relative flex h-2 w-2"><span class="animate-ping absolute h-full w-full rounded-full bg-green-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span></span>
                         <span class="text-[13px] font-mono text-gray-400 uppercase tracking-widest">Pipeline: <span class="text-green-400 font-bold italic">Online</span></span>
@@ -173,28 +148,27 @@
                     <div class="text-[13px] font-mono text-gray-500 uppercase tracking-widest border-l border-white/10 pl-6">Atualização: <span class="text-cyan-400">Tempo Real</span></div>
                 </div>
 
-                <div class="flex flex-col sm:flex-row gap-6 justify-center">
-                    <a href="#portal" class="bg-gradient-acv text-black font-extrabold px-10 py-5 rounded-sm uppercase text-[12px] tracking-widest shadow-[0_0_20px_rgba(157,78,221,0.3)]">Acessar Central de BI's</a>
-                    <a href="#request" class="glass text-white px-10 py-5 rounded-sm font-bold text-[12px] uppercase tracking-widest hover:bg-white/10 transition">
-                        Falar com o Núcleo
-                    </a>
+                <div class="reveal delay-400 flex flex-col sm:flex-row gap-6 justify-center">
+                    <a href="#portal" class="btn-shine bg-gradient-acv text-black font-extrabold px-10 py-5 rounded-sm uppercase text-[12px] tracking-widest shadow-[0_0_20px_rgba(157,78,221,0.3)]">Acessar Central de BI's</a>
+                    <a href="#request" class="glass text-white px-10 py-5 rounded-sm font-bold text-[12px] uppercase tracking-widest hover:bg-white/10 transition">Falar com o Núcleo</a>
                 </div>
             </div>
         </section>
 
-        <!-- Métricas com Animação Scroll Reveal -->
-<section class="py-20 border-y border-white/5 bg-black/50">
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div class="text-center"><p class="text-4xl font-extrabold text-white italic mb-2">+20</p><p class="text-[12px] font-mono text-purple-400 uppercase tracking-widest uppercase">Painéis Ativos</p></div>
-            <div class="text-center"><p class="text-4xl font-extrabold text-white italic mb-2">98%</p><p class="text-[12px] font-mono text-cyan-400 uppercase tracking-widest uppercase">Acurácia Global</p></div>
-            <div class="text-center"><p class="text-4xl font-extrabold text-white italic mb-2">+2.5k</p><p class="text-[12px] font-mono text-purple-400 uppercase tracking-widest uppercase">Horas Economizadas</p></div>
-            <div class="text-center"><p class="text-4xl font-extrabold text-white italic mb-2">24/7</p><p class="text-[12px] font-mono text-cyan-400 uppercase tracking-widest uppercase">Monitoramento</p></div>
-        </div>
+        <!-- MÉTRICAS -->
+        <section class="py-20 border-y border-white/5 bg-black/50">
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="reveal text-center"><p class="text-4xl font-extrabold text-white italic mb-2" data-count="20" data-prefix="+">+20</p><p class="text-[12px] font-mono text-purple-400 uppercase tracking-widest">Painéis Ativos</p></div>
+                <div class="reveal delay-100 text-center"><p class="text-4xl font-extrabold text-white italic mb-2" data-count="98" data-suffix="%">98%</p><p class="text-[12px] font-mono text-cyan-400 uppercase tracking-widest">Acurácia Global</p></div>
+                <div class="reveal delay-200 text-center"><p class="text-4xl font-extrabold text-white italic mb-2" data-count="2.5" data-prefix="+" data-suffix="k" data-decimals="1">+2.5k</p><p class="text-[12px] font-mono text-purple-400 uppercase tracking-widest">Horas Economizadas</p></div>
+                <div class="reveal delay-300 text-center"><p class="text-4xl font-extrabold text-white italic mb-2">24/7</p><p class="text-[12px] font-mono text-cyan-400 uppercase tracking-widest">Monitoramento</p></div>
+            </div>
+        </section>
 
-        <!-- Seção Manifesto / Objetivo -->
+        <!-- MANIFESTO / MISSÃO -->
         <section id="manifesto" class="py-32 max-w-7xl mx-auto px-6 border-t border-white/5">
             <div class="grid lg:grid-cols-2 gap-20 items-center">
-                <div>
+                <div class="reveal">
                     <h2 class="text-4xl font-bold mb-8 text-white uppercase tracking-widest italic">Nossa Missão</h2>
                     <div class="space-y-6 text-gray-400 leading-relaxed text-lg font-light text-justify">
                         <p>Mais do que números, entregamos clareza. A ACV Intelligence foi concebida para ser o motor analítico que sustenta a segurança jurídica e a eficiência financeira da nossa instituição.</p>
@@ -202,597 +176,394 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-1 gap-4 font-mono text-[12px] tracking-widest uppercase">
-                    <div class="glass p-6 rounded-lg flex items-center gap-4 border-l-2 border-cyan-400">
-                        <i data-lucide="check-circle-2" class="text-cyan-400 w-5 h-5"></i>
-                        <span>Jurimetria Avançada</span>
-                    </div>
-                    <div class="glass p-6 rounded-lg flex items-center gap-4 border-l-2 border-purple-500">
-                        <i data-lucide="check-circle-2" class="text-purple-400 w-5 h-5"></i>
-                        <span>KPIs de Rentabilidade</span>
-                    </div>
-                    <div class="glass p-6 rounded-lg flex items-center gap-4 border-l-2 border-cyan-400">
-                        <i data-lucide="check-circle-2" class="text-cyan-400 w-5 h-5"></i>
-                        <span>Automação de Relatórios</span>
-                    </div>
-                    <div class="glass p-6 rounded-lg flex items-center gap-4 border-l-2 border-purple-500">
-                        <i data-lucide="check-circle-2" class="text-purple-400 w-5 h-5"></i>
-                        <span>Suporte à Diretoria</span>
-                    </div>
+                    <div class="reveal glass p-6 rounded-lg flex items-center gap-4 border-l-2 border-cyan-400"><i data-lucide="check-circle-2" class="text-cyan-400 w-5 h-5"></i><span>Jurimetria Avançada</span></div>
+                    <div class="reveal delay-100 glass p-6 rounded-lg flex items-center gap-4 border-l-2 border-purple-500"><i data-lucide="check-circle-2" class="text-purple-400 w-5 h-5"></i><span>KPIs de Rentabilidade</span></div>
+                    <div class="reveal delay-200 glass p-6 rounded-lg flex items-center gap-4 border-l-2 border-cyan-400"><i data-lucide="check-circle-2" class="text-cyan-400 w-5 h-5"></i><span>Automação de Relatórios</span></div>
+                    <div class="reveal delay-300 glass p-6 rounded-lg flex items-center gap-4 border-l-2 border-purple-500"><i data-lucide="check-circle-2" class="text-purple-400 w-5 h-5"></i><span>Suporte à Diretoria</span></div>
                 </div>
             </div>
         </section>
 
-        <!-- Áreas Atendidas com Scroll Reveal -->
-<section id="areas" class="py-32 bg-zinc-950/40">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold text-white uppercase tracking-widest mb-16 italic">Áreas Atendidas</h2>
-            <div class="grid md:grid-cols-4 gap-4">
-                <div class="p-8 border border-white/5 hover:bg-white/5 transition">
-                    <i data-lucide="scale" class="w-8 h-8 mx-auto mb-4 text-purple-400"></i>
-                    <h4 class="font-bold text-sm uppercase">Jurídico</h4>
-                </div>
-                <div class="p-8 border border-white/5 hover:bg-white/5 transition">
-                    <i data-lucide="trending-up" class="w-8 h-8 mx-auto mb-4 text-cyan-400"></i>
-                    <h4 class="font-bold text-sm uppercase">Financeiro</h4>
-                </div>
-                <div class="p-8 border border-white/5 hover:bg-white/5 transition">
-                    <i data-lucide="users" class="w-8 h-8 mx-auto mb-4 text-purple-400"></i>
-                    <h4 class="font-bold text-sm uppercase">RH / Op</h4>
-                </div>
-                <div class="p-8 border border-white/5 hover:bg-white/5 transition">
-                    <i data-lucide="briefcase" class="w-8 h-8 mx-auto mb-4 text-cyan-400"></i>
-                    <h4 class="font-bold text-sm uppercase">Comercial</h4>
+        <!-- ÁREAS ATENDIDAS -->
+        <section id="areas" class="py-32 bg-zinc-950/40">
+            <div class="max-w-7xl mx-auto px-6 text-center">
+                <h2 class="reveal text-4xl font-bold text-white uppercase tracking-widest mb-16 italic">Áreas Atendidas</h2>
+                <div class="grid md:grid-cols-4 gap-4">
+                    <div class="reveal p-8 border border-white/5 hover:bg-white/5 transition"><i data-lucide="scale" class="w-8 h-8 mx-auto mb-4 text-purple-400"></i><h3 class="font-bold text-sm uppercase">Jurídico</h3></div>
+                    <div class="reveal delay-100 p-8 border border-white/5 hover:bg-white/5 transition"><i data-lucide="trending-up" class="w-8 h-8 mx-auto mb-4 text-cyan-400"></i><h3 class="font-bold text-sm uppercase">Financeiro</h3></div>
+                    <div class="reveal delay-200 p-8 border border-white/5 hover:bg-white/5 transition"><i data-lucide="users" class="w-8 h-8 mx-auto mb-4 text-purple-400"></i><h3 class="font-bold text-sm uppercase">RH / Op</h3></div>
+                    <div class="reveal delay-300 p-8 border border-white/5 hover:bg-white/5 transition"><i data-lucide="briefcase" class="w-8 h-8 mx-auto mb-4 text-cyan-400"></i><h3 class="font-bold text-sm uppercase">Comercial</h3></div>
                 </div>
             </div>
-        </div>
+        </section>
 
-       <section id="portal" class="py-32 max-w-7xl mx-auto px-6 border-t border-white/5">
-        <div class="mb-16 border-l-4 border-cyan-500 pl-6">
-            <h2 class="text-4xl font-bold text-white uppercase tracking-widest italic">Central de Dashboards Setoriais</h2>
-            <p class="text-gray-500 mt-2 font-mono text-[13px] uppercase tracking-[0.3em]">Acesse o painel de controle da sua respectiva área</p>
-        </div>
-                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
-                        <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
-                <div><i data-lucide="scale" class="text-purple-500 w-10 h-10 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-lg">Jurídico</h3><p class="text-[13px] text-gray-500 mb-8">Controle de prazos e jurimetria.</p></div>
-                <button onclick="requestLogin('juridico')" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase border border-white/10 rounded-sm italic">Abrir Jurídico</button>
+        <!-- CENTRAL DE DASHBOARDS -->
+        <section id="portal" class="py-32 max-w-7xl mx-auto px-6 border-t border-white/5">
+            <div class="reveal mb-16 border-l-4 border-cyan-500 pl-6">
+                <h2 class="text-4xl font-bold text-white uppercase tracking-widest italic">Central de Dashboards Setoriais</h2>
+                <p class="text-gray-500 mt-2 font-mono text-[13px] uppercase tracking-[0.3em]">Acesse o painel de controle da sua respectiva área</p>
             </div>
-            <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
-                <div><i data-lucide="dollar-sign" class="text-cyan-400 w-10 h-10 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-lg">Financeiro</h3><p class="text-[13px] text-gray-500 mb-8">Faturamento e Fluxo de Caixa.</p></div>
-                <button onclick="requestLogin('financeiro')" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase border border-white/10 rounded-sm italic">Abrir Financeiro</button>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+                <div class="reveal glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
+                    <div><i data-lucide="scale" class="text-purple-500 w-10 h-10 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-lg">Jurídico</h3><p class="text-[13px] text-gray-500 mb-8">Controle de prazos e jurimetria.</p></div>
+                    <button onclick="requestLogin('juridico')" class="btn-shine w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase border border-white/10 rounded-sm italic">Abrir Jurídico</button>
+                </div>
+                <div class="reveal delay-100 glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
+                    <div><i data-lucide="dollar-sign" class="text-cyan-400 w-10 h-10 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-lg">Financeiro</h3><p class="text-[13px] text-gray-500 mb-8">Faturamento e Fluxo de Caixa.</p></div>
+                    <button onclick="requestLogin('financeiro')" class="btn-shine w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase border border-white/10 rounded-sm italic">Abrir Financeiro</button>
+                </div>
+                <div class="reveal delay-200 glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
+                    <div><i data-lucide="users-2" class="text-purple-500 w-10 h-10 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-lg">RH & Operação</h3><p class="text-[13px] text-gray-500 mb-8">Indicadores de produtividade.</p></div>
+                    <button onclick="requestLogin('rh')" class="btn-shine w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase border border-white/10 rounded-sm italic">Abrir Operacional</button>
+                </div>
+                <div class="reveal delay-300 glass p-8 rounded-xl border-white/10 bg-purple-500/5 shadow-[0_0_30px_rgba(157,78,221,0.15)] card-portal flex flex-col justify-between">
+                    <div><i data-lucide="crown" class="text-yellow-500 w-10 h-10 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-lg">Diretoria</h3><p class="text-[13px] text-gray-500 mb-8">Cockpit macro estratégico.</p></div>
+                    <button onclick="requestLogin('diretoria')" class="btn-shine w-full text-center py-4 bg-gradient-acv text-black font-extrabold text-[12px] uppercase rounded-sm italic">Painéis Executivos</button>
+                </div>
             </div>
-            <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
-                <div><i data-lucide="users-2" class="text-purple-500 w-10 h-10 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-lg">RH & Operação</h3><p class="text-[13px] text-gray-500 mb-8">Indicadores de produtividade.</p></div>
-                <button onclick="requestLogin('rh')" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase border border-white/10 rounded-sm italic">Abrir Operacional</button>
-            </div>
-            <div class="glass p-8 rounded-xl border-white/10 bg-purple-500/5 shadow-[0_0_30px_rgba(157,78,221,0.15)] card-portal flex flex-col justify-between">
-                <div><i data-lucide="crown" class="text-yellow-500 w-10 h-10 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-lg">Diretoria</h3><p class="text-[13px] text-gray-500 mb-8">Cockpit macro estratégico.</p></div>
-                <button onclick="requestLogin('diretoria')" class="w-full text-center py-4 bg-gradient-acv text-black font-extrabold text-[12px] uppercase rounded-sm italic">Painéis Executivos</button>
-            </div>
-        </div>
-    </section>
+        </section>
 
-        <!-- Roadmap de Inovação com Scroll Reveal -->
-<section id="innovation" class="py-32 max-w-7xl mx-auto px-6">
-        <h2 class="text-center text-4xl font-extrabold text-white mb-20 uppercase tracking-widest italic">Roadmap de Inovação 2026</h2>
-        <div class="md:grid md:grid-cols-3 gap-12 text-left">
-            <div class="mb-12"><h4 class="text-cyan-400 font-mono text-[12px] uppercase font-bold mb-4">Q2 2026: IA Preditiva</h4><p class="text-[14px] text-gray-500">Modelos para previsão de duração processual.</p></div>
-            <div class="mb-12"><h4 class="text-purple-500 font-mono text-[12px] uppercase font-bold mb-4">Q3 2026: Automação</h4><p class="text-[14px] text-gray-500">Sincronização 100% autônoma entre sistemas.</p></div>
-            <div class="mb-12"><h4 class="text-cyan-400 font-mono text-[12px] uppercase font-bold mb-4">Q4 2026: Analytics</h4><p class="text-[14px] text-gray-500">Rentabilidade horária avançada por magistrado.</p></div>
-        </div>
-    </section>
+        <!-- ROADMAP -->
+        <section id="innovation" class="py-32 max-w-7xl mx-auto px-6">
+            <h2 class="reveal text-center text-4xl font-extrabold text-white mb-20 uppercase tracking-widest italic">Roadmap de Inovação 2026</h2>
+            <div class="md:grid md:grid-cols-3 gap-12 text-left">
+                <div class="reveal mb-12"><h3 class="text-cyan-400 font-mono text-[12px] uppercase font-bold mb-4">Q2 2026: IA Preditiva</h3><p class="text-[14px] text-gray-500">Modelos para previsão de duração processual.</p></div>
+                <div class="reveal delay-100 mb-12"><h3 class="text-purple-500 font-mono text-[12px] uppercase font-bold mb-4">Q3 2026: Automação</h3><p class="text-[14px] text-gray-500">Sincronização 100% autônoma entre sistemas.</p></div>
+                <div class="reveal delay-200 mb-12"><h3 class="text-cyan-400 font-mono text-[12px] uppercase font-bold mb-4">Q4 2026: Analytics</h3><p class="text-[14px] text-gray-500">Rentabilidade horária avançada por magistrado.</p></div>
+            </div>
+        </section>
 
-        <!-- FAQ ANALÍTICO -->
+        <!-- FAQ -->
         <section class="py-32 bg-zinc-950/20">
             <div class="max-w-4xl mx-auto px-6">
-                <h2 class="text-center text-2xl font-bold text-white mb-16 uppercase tracking-widest italic">Suporte & FAQ</h2>
+                <h2 class="reveal text-center text-2xl font-bold text-white mb-16 uppercase tracking-widest italic">Suporte &amp; FAQ</h2>
                 <div class="space-y-4">
-                    <div class="glass p-6 rounded-lg border border-white/5">
-                        <h4 class="text-white text-base font-bold uppercase mb-2">Como solicitar um novo indicador ou dashboard?</h4>
+                    <div class="reveal glass p-6 rounded-lg border border-white/5">
+                        <h3 class="text-white text-base font-bold uppercase mb-2">Como solicitar um novo indicador ou dashboard?</h3>
                         <p class="text-[14px] text-gray-500">Acesse "Solicitar Dados" no menu superior e preencha o formulário. Nossa equipe avaliará a viabilidade técnica em até 48 horas.</p>
                     </div>
-                    <div class="glass p-6 rounded-lg border border-white/5">
-                        <h4 class="text-white text-base font-bold uppercase mb-2">Qual a fonte dos dados exibidos?</h4>
+                    <div class="reveal delay-100 glass p-6 rounded-lg border border-white/5">
+                        <h3 class="text-white text-base font-bold uppercase mb-2">Qual a fonte dos dados exibidos?</h3>
                         <p class="text-[14px] text-gray-500">Trabalhamos com a integração direta dos bancos de dados do CPJ, ProJuris, sistemas internos e planilhas de governança.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Footer -->
+        <!-- FOOTER -->
         <footer id="request" class="py-20 border-t border-white/10 bg-[#020202]">
             <div class="max-w-7xl mx-auto px-6 text-center">
-                <img src="logo-acv.png" alt="ACV Logo" class="h-48 w-auto mx-auto mb-6 logo-glow">
-                <h3 class="text-xl font-bold mb-4 uppercase tracking-widest text-white">Central de Chamados de Dados</h3>
+                <img src="logo-acv.png" alt="ACV Intelligence" class="h-48 w-auto mx-auto mb-6 logo-glow">
+                <h2 class="text-xl font-bold mb-4 uppercase tracking-widest text-white">Central de Chamados de Dados</h2>
                 <p class="text-gray-500 text-base mb-10 max-w-lg mx-auto italic">Precisa de um relatório específico ou uma nova automação? <br>Entre em contato com o núcleo interno via e-mail ou ramal.</p>
                 <div class="flex flex-wrap justify-center gap-8 text-[13px] font-mono tracking-widest text-gray-400 uppercase">
-                    <div class="flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4 text-cyan-400"></i> Inteligenciadedadosacv@acvadv.com.br</div>
-                    <a href="https://teams.microsoft.com/l/team/..." target="_blank" class="flex items-center gap-2 hover:text-white transition cursor-pointer"><i data-lucide="message-square" class="w-4 h-4 text-purple-400"></i> Teams</a>
+                    <a href="mailto:Inteligenciadedadosacv@acvadv.com.br" class="flex items-center gap-2 hover:text-white transition"><i data-lucide="mail" class="w-4 h-4 text-cyan-400"></i> Inteligenciadedadosacv@acvadv.com.br</a>
+                    <a href="https://teams.microsoft.com/l/team/..." target="_blank" rel="noopener" class="flex items-center gap-2 hover:text-white transition"><i data-lucide="message-square" class="w-4 h-4 text-purple-400"></i> Teams</a>
                     <div class="flex items-center gap-2"><i data-lucide="phone-call" class="w-4 h-4 text-cyan-400"></i> Ramal: 4004</div>
                 </div>
                 <div class="mt-20 space-y-2">
-    <div class="text-[13px] text-white font-mono tracking-[0.5em] uppercase italic">
-        ACV Intelligence &copy; 2026 | Em dados nós confiamos. Em estratégia nós lideramos.
-    </div>
-    <div class="text-[10px] text-white font-mono tracking-[0.3em] uppercase">
-        [ Arquiteto de Dados & Web: <span class="text-cyan-400">Lucas Amado</span> ]
-    </div>
-</div>
+                    <div class="text-[13px] text-white font-mono tracking-[0.5em] uppercase italic">ACV Intelligence &copy; 2026 | Em dados nós confiamos. Em estratégia nós lideramos.</div>
+                    <div class="text-[10px] text-white font-mono tracking-[0.3em] uppercase">[ Arquiteto de Dados &amp; Web: <span class="text-cyan-400">Lucas Amado</span> ]</div>
+                </div>
+            </div>
         </footer>
     </div>
 
-    <!-- #################################################################### -->
-    <!-- NOVA SEÇÃO: SUB-HUB JURÍDICO (Fica invisível até ser chamado) -->
-    <!-- #################################################################### -->
+    <!-- ====================================================================
+         SUB-HUB: JURÍDICO
+         OBS: cards marcados como "Em breve" aguardam o link real do Power BI.
+         Para ativar: troque href="#" por o link e remova as classes
+         "card-soon" do <a> e o <span class="badge-soon">.
+         ==================================================================== -->
     <div id="subhub-juridico" class="hidden min-h-screen pt-32 pb-20 px-6 relative z-10">
         <div class="hero-mesh"></div>
         <div class="max-w-7xl mx-auto">
-            <!-- Header do Sub-Hub -->
             <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                 <div>
-                    <button onclick="closeSubHub('juridico')" class="text-cyan-400 text-[10px] font-mono uppercase tracking-[0.4em] mb-4 flex items-center gap-2 hover:translate-x-[-5px] transition-all">
-                        <i data-lucide="arrow-left" class="w-3 h-3"></i> Voltar ao Menu Principal
-                    </button>
+                    <button onclick="closeSubHub('juridico')" class="text-cyan-400 text-[10px] font-mono uppercase tracking-[0.4em] mb-4 flex items-center gap-2 hover:translate-x-[-5px] transition-all"><i data-lucide="arrow-left" class="w-3 h-3"></i> Voltar ao Menu Principal</button>
                     <h2 class="text-5xl font-extrabold text-white uppercase tracking-normal italic">Inteligência <span class="text-gradient">Jurídica</span></h2>
                     <p class="text-gray-500 mt-2 font-mono text-[12px] uppercase tracking-widest">Selecione o painel de dados da sua área de atuação</p>
                 </div>
-                <div class="glass px-6 py-2 rounded-full border border-purple-500/20">
-                    <span class="text-[12px] text-purple-400 font-mono uppercase tracking-widest">Acesso Autorizado: ACV Jur</span>
-                </div>
+                <div class="glass px-6 py-2 rounded-full border border-purple-500/20"><span class="text-[12px] text-purple-400 font-mono uppercase tracking-widest">Acesso Autorizado: ACV Jur</span></div>
             </div>
-
-            <!-- GRID DE ÁREAS JURÍDICAS -->
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- CÍVEL -->
                 <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
-                    <div>
-                        <i data-lucide="scale" class="text-purple-500 w-10 h-10 mb-6"></i>
-                        <h3 class="text-white font-bold mb-2 uppercase text-xl">Cível</h3>
-                        <p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Gestão de carteira cível estratégica e KPIs de performance.</p>
-                    </div>
-                    <a href="LINK_DO_BI_CIVEL_AQUI" target="_blank" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar Painel</a>
+                    <div><i data-lucide="scale" class="text-purple-500 w-10 h-10 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-xl">Cível</h3><p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Gestão de carteira cível estratégica e KPIs de performance.</p></div>
+                    <!-- TODO: colar link do BI Cível -->
+                    <a href="#" class="card-soon w-full text-center py-4 bg-white/5 font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm"><span class="badge-soon">Em breve</span></a>
                 </div>
-
                 <!-- PASSIVAS -->
                 <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
-                    <div>
-                        <i data-lucide="shield-alert" class="text-cyan-400 w-10 h-10 mb-6"></i>
-                        <h3 class="text-white font-bold mb-2 uppercase text-xl">Passivas</h3>
-                        <p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Contingenciamento e análise de riscos em demandas passivas.</p>
-                    </div>
-                    <a href="LINK_DO_BI_PASSIVAS_AQUI" target="_blank" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar Painel</a>
+                    <div><i data-lucide="shield-alert" class="text-cyan-400 w-10 h-10 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-xl">Passivas</h3><p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Contingenciamento e análise de riscos em demandas passivas.</p></div>
+                    <!-- TODO: colar link do BI Passivas -->
+                    <a href="#" class="card-soon w-full text-center py-4 bg-white/5 font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm"><span class="badge-soon">Em breve</span></a>
                 </div>
-
                 <!-- PREVIDENCIÁRIO -->
                 <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
-                    <div>
-                        <i data-lucide="user-plus" class="text-purple-500 w-10 h-10 mb-6"></i>
-                        <h3 class="text-white font-bold mb-2 uppercase text-xl">Previdenciário</h3>
-                        <p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Indicadores de benefícios, revisões e concessões previdenciárias.</p>
-                    </div>
-                    <a href="LINK_DO_BI_PREVIDENCIARIO_AQUI" target="_blank" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar Painel</a>
+                    <div><i data-lucide="user-plus" class="text-purple-500 w-10 h-10 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-xl">Previdenciário</h3><p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Indicadores de benefícios, revisões e concessões previdenciárias.</p></div>
+                    <!-- TODO: colar link do BI Previdenciário -->
+                    <a href="#" class="card-soon w-full text-center py-4 bg-white/5 font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm"><span class="badge-soon">Em breve</span></a>
                 </div>
-
                 <!-- TRABALHISTA -->
                 <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
-                    <div>
-                        <i data-lucide="hammer" class="text-cyan-400 w-10 h-10 mb-6"></i>
-                        <h3 class="text-white font-bold mb-2 uppercase text-xl">Trabalhista</h3>
-                        <p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Métricas de processos laborais e acordos estratégicos.</p>
-                    </div>
-                    <a href="LINK_DO_BI_TRABALHISTA_AQUI" target="_blank" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar Painel</a>
+                    <div><i data-lucide="hammer" class="text-cyan-400 w-10 h-10 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-xl">Trabalhista</h3><p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Métricas de processos laborais e acordos estratégicos.</p></div>
+                    <!-- TODO: colar link do BI Trabalhista -->
+                    <a href="#" class="card-soon w-full text-center py-4 bg-white/5 font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm"><span class="badge-soon">Em breve</span></a>
                 </div>
-
                 <!-- TRIBUTÁRIO -->
                 <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
-                    <div>
-                        <i data-lucide="receipt" class="text-purple-500 w-10 h-10 mb-6"></i>
-                        <h3 class="text-white font-bold mb-2 uppercase text-xl">Tributário</h3>
-                        <p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Dashboards de teses tributárias e recuperação de créditos.</p>
-                    </div>
-                    <a href="LINK_DO_BI_TRIBUTARIO_AQUI" target="_blank" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar Painel</a>
+                    <div><i data-lucide="receipt" class="text-purple-500 w-10 h-10 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-xl">Tributário</h3><p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Dashboards de teses tributárias e recuperação de créditos.</p></div>
+                    <!-- TODO: colar link do BI Tributário -->
+                    <a href="#" class="card-soon w-full text-center py-4 bg-white/5 font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm"><span class="badge-soon">Em breve</span></a>
                 </div>
             </div>
         </div>
     </div>
-    <!-- #################################################################### -->
-    <!-- NOVA SEÇÃO: SUB-HUB FINANCEIRO (Fica invisível até ser chamado) -->
-    <!-- #################################################################### -->
+
+    <!-- ====================================================================
+         SUB-HUB: FINANCEIRO
+         ==================================================================== -->
     <div id="subhub-financeiro" class="hidden min-h-screen pt-32 pb-20 px-6 relative z-10 text-left">
         <div class="hero-mesh"></div>
         <div class="max-w-7xl mx-auto">
-            <!-- Header do Sub-Hub -->
             <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                 <div>
-                    <button onclick="closeSubHub('financeiro')" class="text-cyan-400 text-[10px] font-mono uppercase tracking-[0.4em] mb-4 flex items-center gap-2 hover:translate-x-[-5px] transition-all">
-                        <i data-lucide="arrow-left" class="w-3 h-3"></i> Voltar ao Menu Principal
-                    </button>
+                    <button onclick="closeSubHub('financeiro')" class="text-cyan-400 text-[10px] font-mono uppercase tracking-[0.4em] mb-4 flex items-center gap-2 hover:translate-x-[-5px] transition-all"><i data-lucide="arrow-left" class="w-3 h-3"></i> Voltar ao Menu Principal</button>
                     <h2 class="text-5xl font-extrabold text-white uppercase tracking-normal italic">Inteligência <span class="text-gradient">Financeira</span></h2>
                     <p class="text-gray-500 mt-2 font-mono text-[12px] uppercase tracking-widest">Selecione o painel de dados financeiros</p>
                 </div>
-                <div class="glass px-6 py-2 rounded-full border border-purple-500/20">
-                    <span class="text-[12px] text-purple-400 font-mono uppercase tracking-widest">Acesso Autorizado: ACV Fin</span>
-                </div>
+                <div class="glass px-6 py-2 rounded-full border border-purple-500/20"><span class="text-[12px] text-purple-400 font-mono uppercase tracking-widest">Acesso Autorizado: ACV Fin</span></div>
             </div>
-
-            <!-- GRID DE ÁREAS FINANCEIRAS -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
-                <!-- ENTREGÁVEIS -->
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- ENTREGÁVEIS (link real) -->
                 <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
-                    <div>
-                        <i data-lucide="clipboard-check" class="text-purple-500 w-10 h-10 mb-6"></i>
-                        <h3 class="text-white font-bold mb-2 uppercase text-xl italic">Entregáveis</h3>
-                        <p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Acompanhamento de metas financeiras e relatórios de entregas setoriais.</p>
-                    </div>
-                    <a href="https://app.powerbi.com/view?r=eyJrIjoiYWVlZmMzODMtMmY0My00MzRkLTllMjktODI4YTllOTIyNTc4IiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar Painel</a>
+                    <div><i data-lucide="clipboard-check" class="text-purple-500 w-10 h-10 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-xl italic">Entregáveis</h3><p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Acompanhamento de metas financeiras e relatórios de entregas setoriais.</p></div>
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiYWVlZmMzODMtMmY0My00MzRkLTllMjktODI4YTllOTIyNTc4IiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" rel="noopener" class="btn-shine w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar Painel</a>
                 </div>
-
                 <!-- ORÇAMENTO ANUAL -->
                 <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
-                    <div>
-                        <i data-lucide="calendar-days" class="text-cyan-400 w-10 h-10 mb-6"></i>
-                        <h3 class="text-white font-bold mb-2 uppercase text-xl italic">Orçamento Anual</h3>
-                        <p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Planejamento orçamentário, forecast e análise de desvios anuais.</p>
-                    </div>
-                    <a href="LINK_BI_ORCAMENTO" target="_blank" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar Painel</a>
+                    <div><i data-lucide="calendar-days" class="text-cyan-400 w-10 h-10 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-xl italic">Orçamento Anual</h3><p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Planejamento orçamentário, forecast e análise de desvios anuais.</p></div>
+                    <!-- TODO: colar link do BI Orçamento -->
+                    <a href="#" class="card-soon w-full text-center py-4 bg-white/5 font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm"><span class="badge-soon">Em breve</span></a>
                 </div>
             </div>
         </div>
     </div>
-<!-- #################################################################### -->
-    <!-- NOVA SEÇÃO: SUB-HUB RH & OPERAÇÃO (Fica invisível até ser chamado) -->
-    <!-- #################################################################### -->
+
+    <!-- ====================================================================
+         SUB-HUB: RH & OPERAÇÃO
+         ==================================================================== -->
     <div id="subhub-rh" class="hidden min-h-screen pt-32 pb-20 px-6 relative z-10 text-left">
         <div class="hero-mesh"></div>
         <div class="max-w-7xl mx-auto">
-            <!-- Header do Sub-Hub -->
             <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                 <div>
-                    <button onclick="closeSubHub('rh')" class="text-cyan-400 text-[10px] font-mono uppercase tracking-[0.4em] mb-4 flex items-center gap-2 hover:translate-x-[-5px] transition-all">
-                        <i data-lucide="arrow-left" class="w-3 h-3"></i> Voltar ao Menu Principal
-                    </button>
-                    <h2 class="text-5xl font-extrabold text-white uppercase tracking-normal italic">RH & <span class="text-gradient">Operação</span></h2>
+                    <button onclick="closeSubHub('rh')" class="text-cyan-400 text-[10px] font-mono uppercase tracking-[0.4em] mb-4 flex items-center gap-2 hover:translate-x-[-5px] transition-all"><i data-lucide="arrow-left" class="w-3 h-3"></i> Voltar ao Menu Principal</button>
+                    <h2 class="text-5xl font-extrabold text-white uppercase tracking-normal italic">RH &amp; <span class="text-gradient">Operação</span></h2>
                     <p class="text-gray-500 mt-2 font-mono text-[12px] uppercase tracking-widest">Painéis de Gestão de Cooperativas e Pessoas</p>
                 </div>
-                <div class="glass px-6 py-2 rounded-full border border-purple-500/20">
-                    <span class="text-[12px] text-purple-400 font-mono uppercase tracking-widest">Acesso Autorizado: ACV RH/Ops</span>
-                </div>
+                <div class="glass px-6 py-2 rounded-full border border-purple-500/20"><span class="text-[12px] text-purple-400 font-mono uppercase tracking-widest">Acesso Autorizado: ACV RH/Ops</span></div>
             </div>
-
-            <!-- GRID DE ÁREAS RH & OPERAÇÃO -->
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <!-- Sicredi Extra -->
                 <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
-                    <div>
-                        <i data-lucide="building-2" class="text-purple-500 w-10 h-10 mb-6"></i>
-                        <h3 class="text-white font-bold mb-2 uppercase text-lg italic leading-tight">Cooperativa Sicredi Extra</h3>
-                        <p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Painel analítico de performance - Carteira Extra.</p>
-                    </div>
-                    <a href="https://app.powerbi.com/view?r=eyJrIjoiYmVhZTI3MTYtOTM5My00N2E3LTg3MzctZGE4ZWYwMDE3M2NjIiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar</a>
+                    <div><i data-lucide="building-2" class="text-purple-500 w-10 h-10 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-lg italic leading-tight">Cooperativa Sicredi Extra</h3><p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Painel analítico de performance - Carteira Extra.</p></div>
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiYmVhZTI3MTYtOTM5My00N2E3LTg3MzctZGE4ZWYwMDE3M2NjIiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" rel="noopener" class="btn-shine w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar</a>
                 </div>
-
-                <!-- Sicredi Judicial -->
                 <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
-                    <div>
-                        <i data-lucide="gavel" class="text-cyan-400 w-10 h-10 mb-6"></i>
-                        <h3 class="text-white font-bold mb-2 uppercase text-lg italic leading-tight">Cooperativa Sicredi Judicial</h3>
-                        <p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Painel analítico de performance - Carteira Judicial.</p>
-                    </div>
-                    <a href="https://app.powerbi.com/view?r=eyJrIjoiZjg1NmY2ZTctMGRjYi00YTEzLTk4OTgtMjA2MWE4YTEyMTgxIiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar</a>
+                    <div><i data-lucide="gavel" class="text-cyan-400 w-10 h-10 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-lg italic leading-tight">Cooperativa Sicredi Judicial</h3><p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Painel analítico de performance - Carteira Judicial.</p></div>
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiZjg1NmY2ZTctMGRjYi00YTEzLTk4OTgtMjA2MWE4YTEyMTgxIiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" rel="noopener" class="btn-shine w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar</a>
                 </div>
-
-                <!-- Sicoob -->
                 <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
-                    <div>
-                        <i data-lucide="landmark" class="text-purple-500 w-10 h-10 mb-6"></i>
-                        <h3 class="text-white font-bold mb-2 uppercase text-lg italic leading-tight">Cooperativa Sicoob</h3>
-                        <p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Indicadores de produtividade e metas da carteira Sicoob.</p>
-                    </div>
-                    <a href="https://app.powerbi.com/view?r=eyJrIjoiNGZmZTFiM2YtOGUyNC00ZDdhLWIwNTgtNTNhOGVhMzBiYWViIiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar</a>
+                    <div><i data-lucide="landmark" class="text-purple-500 w-10 h-10 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-lg italic leading-tight">Cooperativa Sicoob</h3><p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Indicadores de produtividade e metas da carteira Sicoob.</p></div>
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiNGZmZTFiM2YtOGUyNC00ZDdhLWIwNTgtNTNhOGVhMzBiYWViIiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" rel="noopener" class="btn-shine w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar</a>
                 </div>
-
-                <!-- Cresol -->
                 <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
-                    <div>
-                        <i data-lucide="briefcase" class="text-cyan-400 w-10 h-10 mb-6"></i>
-                        <h3 class="text-white font-bold mb-2 uppercase text-lg italic leading-tight">Cooperativa Cresol</h3>
-                        <p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Painel de acompanhamento tático - Carteira Cresol.</p>
-                    </div>
-                    <a href="https://app.powerbi.com/view?r=eyJrIjoiMzBjMWYwZWUtN2JkZi00NGI4LWFmMWUtYzdlNzE2ZjI2YTk3IiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar</a>
+                    <div><i data-lucide="briefcase" class="text-cyan-400 w-10 h-10 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-lg italic leading-tight">Cooperativa Cresol</h3><p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Painel de acompanhamento tático - Carteira Cresol.</p></div>
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiMzBjMWYwZWUtN2JkZi00NGI4LWFmMWUtYzdlNzE2ZjI2YTk3IiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" rel="noopener" class="btn-shine w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar</a>
                 </div>
-
-                <!-- BSF -->
                 <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between border-l-2 border-purple-500">
-                    <div>
-                        <i data-lucide="file-text" class="text-purple-400 w-10 h-10 mb-6"></i>
-                        <h3 class="text-white font-bold mb-2 uppercase text-xl italic">BSF</h3>
-                        <p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Gestão de dados e indicadores operacionais BSF.</p>
-                    </div>
-                    <a href="https://app.powerbi.com/view?r=eyJrIjoiMmFmOTY0YjEtOTc4NC00NTk0LThiMjMtZjljMzM3ZmQwYTk4IiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar</a>
+                    <div><i data-lucide="file-text" class="text-purple-400 w-10 h-10 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-xl italic">BSF</h3><p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Gestão de dados e indicadores operacionais BSF.</p></div>
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiMmFmOTY0YjEtOTc4NC00NTk0LThiMjMtZjljMzM3ZmQwYTk4IiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" rel="noopener" class="btn-shine w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar</a>
                 </div>
-
-                <!-- Gestão de Pessoas -->
                 <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between border-l-2 border-cyan-500">
-                    <div>
-                        <i data-lucide="users" class="text-cyan-400 w-10 h-10 mb-6"></i>
-                        <h3 class="text-white font-bold mb-2 uppercase text-lg italic leading-tight">Gestão de Pessoas</h3>
-                        <p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Entregáveis, turnover e indicadores de capital humano.</p>
-                    </div>
-                    <a href="https://app.powerbi.com/view?r=eyJrIjoiMjM0YmRkNjQtMDUyOS00ZDMxLWI1ZjYtMWEwOGRiNzU2NDVhIiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar</a>
+                    <div><i data-lucide="users" class="text-cyan-400 w-10 h-10 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-lg italic leading-tight">Gestão de Pessoas</h3><p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Entregáveis, turnover e indicadores de capital humano.</p></div>
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiMjM0YmRkNjQtMDUyOS00ZDMxLWI1ZjYtMWEwOGRiNzU2NDVhIiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" rel="noopener" class="btn-shine w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar</a>
                 </div>
-
             </div>
         </div>
     </div>
-<!-- #################################################################### -->
-    <!-- NOVA SEÇÃO: SUB-HUB DIRETORIA (Fica invisível até ser chamado) -->
-    <!-- #################################################################### -->
+
+    <!-- ====================================================================
+         SUB-HUB: DIRETORIA
+         ==================================================================== -->
     <div id="subhub-diretoria" class="hidden min-h-screen pt-32 pb-20 px-6 relative z-10 text-left">
         <div class="hero-mesh"></div>
         <div class="max-w-7xl mx-auto">
-            <!-- Header do Sub-Hub -->
             <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                 <div>
-                    <button onclick="closeSubHub('diretoria')" class="text-cyan-400 text-[10px] font-mono uppercase tracking-[0.4em] mb-4 flex items-center gap-2 hover:translate-x-[-5px] transition-all">
-                        <i data-lucide="arrow-left" class="w-3 h-3"></i> Voltar ao Menu Principal
-                    </button>
+                    <button onclick="closeSubHub('diretoria')" class="text-cyan-400 text-[10px] font-mono uppercase tracking-[0.4em] mb-4 flex items-center gap-2 hover:translate-x-[-5px] transition-all"><i data-lucide="arrow-left" class="w-3 h-3"></i> Voltar ao Menu Principal</button>
                     <h2 class="text-5xl font-extrabold text-white uppercase tracking-normal italic">Cockpit <span class="text-gradient">Estratégico</span></h2>
                     <p class="text-gray-500 mt-2 font-mono text-[12px] uppercase tracking-widest">Painéis Executivos de Controle Macro</p>
                 </div>
-                <div class="glass px-6 py-2 rounded-full border border-yellow-500/20">
-                    <span class="text-[10px] text-yellow-500 font-mono uppercase tracking-widest flex items-center gap-2">
-                        <i data-lucide="shield-check" class="w-3 h-3"></i> Acesso Restrito: Diretoria
-                    </span>
-                </div>
+                <div class="glass px-6 py-2 rounded-full border border-yellow-500/20"><span class="text-[10px] text-yellow-500 font-mono uppercase tracking-widest flex items-center gap-2"><i data-lucide="shield-check" class="w-3 h-3"></i> Acesso Restrito: Diretoria</span></div>
             </div>
-
-            <!-- GRID DE ÁREAS DIRETORIA -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                
-                <!-- Controladoria -->
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                 <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
-                    <div>
-                        <i data-lucide="pie-chart" class="text-purple-500 w-10 h-10 mb-6"></i>
-                        <h3 class="text-white font-bold mb-2 uppercase text-xl italic">Controladoria</h3>
-                        <p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Gestão de indicadores financeiros consolidados e auditoria de performance.</p>
-                    </div>
-                    <a href="https://app.powerbi.com/view?r=eyJrIjoiMjdkN2M4YWItOWEyZS00ZDExLTk1MDItOGYwNjlhNGNlYjhhIiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar Painel</a>
+                    <div><i data-lucide="pie-chart" class="text-purple-500 w-10 h-10 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-xl italic">Controladoria</h3><p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Gestão de indicadores financeiros consolidados e auditoria de performance.</p></div>
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiMjdkN2M4YWItOWEyZS00ZDExLTk1MDItOGYwNjlhNGNlYjhhIiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" rel="noopener" class="btn-shine w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar Painel</a>
                 </div>
-
-                <!-- Telão GOP -->
                 <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
-                    <div>
-                        <i data-lucide="monitor" class="text-cyan-400 w-10 h-10 mb-6"></i>
-                        <h3 class="text-white font-bold mb-2 uppercase text-xl italic">Telão GOP</h3>
-                        <p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Visão operacional em tempo real da Gestão de Operações (GOP).</p>
-                    </div>
-                    <a href="https://app.powerbi.com/view?r=eyJrIjoiZjk3YmI0NWUtMTc1MS00M2E0LWI2MmMtNzAxZmJhYWRjZjY2IiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar Painel</a>
+                    <div><i data-lucide="monitor" class="text-cyan-400 w-10 h-10 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-xl italic">Telão GOP</h3><p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Visão operacional em tempo real da Gestão de Operações (GOP).</p></div>
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiZjk3YmI0NWUtMTc1MS00M2E0LWI2MmMtNzAxZmJhYWRjZjY2IiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" rel="noopener" class="btn-shine w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar Painel</a>
                 </div>
-
-                <!-- Telão RC -->
                 <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
-                    <div>
-                        <i data-lucide="target" class="text-purple-500 w-10 h-10 mb-6"></i>
-                        <h3 class="text-white font-bold mb-2 uppercase text-xl italic text-gradient">Telão RC</h3>
-                        <p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Monitoramento de metas e resultados comerciais estratégicos.</p>
-                    </div>
-                    <a href="https://app.powerbi.com/view?r=eyJrIjoiOWVkZWM1YjAtZmMwMC00NWViLWE2NjAtZDU5NmNhN2FjMWI1IiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar Painel</a>
+                    <div><i data-lucide="target" class="text-purple-500 w-10 h-10 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-xl italic">Telão RC</h3><p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Monitoramento de metas e resultados comerciais estratégicos.</p></div>
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiOWVkZWM1YjAtZmMwMC00NWViLWE2NjAtZDU5NmNhN2FjMWI1IiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" rel="noopener" class="btn-shine w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar Painel</a>
                 </div>
-
-                <!-- Telão Acionamentos -->
                 <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
-                    <div>
-                        <i data-lucide="zap" class="text-cyan-400 w-10 h-10 mb-6"></i>
-                        <h3 class="text-white font-bold mb-2 uppercase text-xl italic text-gradient">Telão Acionamentos</h3>
-                        <p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Indicadores de produtividade e volume de acionamentos diários.</p>
-                    </div>
-                    <a href="https://app.powerbi.com/view?r=eyJrIjoiYmUzNWRjMWEtNTIyYS00ZDA0LWExZDktMGJmNDFjMTgxZjBiIiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar Painel</a>
+                    <div><i data-lucide="zap" class="text-cyan-400 w-10 h-10 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-xl italic">Telão Acionamentos</h3><p class="text-[13px] text-gray-500 mb-8 leading-relaxed">Indicadores de produtividade e volume de acionamentos diários.</p></div>
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiYmUzNWRjMWEtNTIyYS00ZDA0LWExZDktMGJmNDFjMTgxZjBiIiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" rel="noopener" class="btn-shine w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar Painel</a>
                 </div>
-
             </div>
         </div>
     </div>
-    <!-- #################################################################### -->
-    <!-- NOVA SEÇÃO: SUB-HUB EQUIPE (Fica invisível até ser chamado) -->
-    <!-- #################################################################### -->
+
+    <!-- ====================================================================
+         SUB-HUB: EQUIPE
+         ==================================================================== -->
     <div id="subhub-equipe" class="hidden min-h-screen pt-32 pb-20 px-6 relative z-10 text-left">
         <div class="hero-mesh"></div>
         <div class="max-w-7xl mx-auto">
-            <!-- Header -->
             <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                 <div>
-                    <button onclick="closeSubHub('equipe')" class="text-cyan-400 text-[10px] font-mono uppercase tracking-[0.4em] mb-4 flex items-center gap-2 hover:translate-x-[-5px] transition-all">
-                        <i data-lucide="arrow-left" class="w-3 h-3"></i> Voltar ao Menu Principal
-                    </button>
+                    <button onclick="closeSubHub('equipe')" class="text-cyan-400 text-[10px] font-mono uppercase tracking-[0.4em] mb-4 flex items-center gap-2 hover:translate-x-[-5px] transition-all"><i data-lucide="arrow-left" class="w-3 h-3"></i> Voltar ao Menu Principal</button>
                     <h2 class="text-5xl font-extrabold text-white uppercase tracking-widest italic">Nossa <span class="text-gradient">Equipe</span></h2>
                     <p class="text-white mt-2 font-mono text-[13px] uppercase tracking-widest">Os especialistas por trás da inteligência ACV</p>
                 </div>
             </div>
-
-            <!-- GRID DA EQUIPE -->
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <!-- Jhenny Mugart -->
+                <!-- Jhenny -->
                 <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col items-center text-center">
-                    <div class="w-20 h-20 rounded-full bg-gradient-acv p-1 mb-6 logo-glow">
-                        <div class="w-full h-full rounded-full bg-black flex items-center justify-center text-xl font-bold text-white">JM</div>
-                    </div>
-                    <h3 class="text-white font-bold uppercase text-2xl italic text-gradient">Jhenny Mugart</h3>
+                    <div class="w-20 h-20 rounded-full bg-gradient-acv p-1 mb-6 logo-glow"><div class="w-full h-full rounded-full bg-black flex items-center justify-center text-xl font-bold text-white">JM</div></div>
+                    <h3 class="text-white font-bold uppercase text-2xl italic">Jhenny Mugart</h3>
                     <p class="text-cyan-400 font-mono text-[13px] uppercase tracking-widest mb-4">Coordenadora do Núcleo</p>
                     <p class="text-[12px] text-white mb-6 leading-relaxed">Liderança estratégica e governança. Responsável pela visão macro e alinhamento da inteligência com os objetivos do escritório.</p>
-                    <div class="flex flex-wrap justify-center gap-2 mb-8">
-                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-cyan-400 uppercase">Gestão de Projetos</span>
-                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-cyan-400 uppercase">Estratégia</span>
-                    </div>
-                    <a href="https://br.linkedin.com/in/jhenny-andrade-viana-mugart-a99a591a6" target="_blank" class="text-[10px] text-white hover:text-white transition uppercase tracking-widest underline">LinkedIn</a>
+                    <div class="flex flex-wrap justify-center gap-2 mb-8"><span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-cyan-400 uppercase">Gestão de Projetos</span><span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-cyan-400 uppercase">Estratégia</span></div>
+                    <a href="https://br.linkedin.com/in/jhenny-andrade-viana-mugart-a99a591a6" target="_blank" rel="noopener" class="text-[10px] text-white hover:text-cyan-400 transition uppercase tracking-widest underline">LinkedIn</a>
                 </div>
-
-                <!-- Lucas Amado -->
+                <!-- Lucas (destaque) -->
                 <div class="glass p-8 rounded-xl border-2 border-cyan-500/30 card-portal flex flex-col items-center text-center relative overflow-hidden">
                     <div class="absolute top-0 right-0 bg-cyan-500 text-black text-[10px] font-bold px-3 py-1 uppercase tracking-tighter">Project Creator</div>
-                    <div class="w-20 h-20 rounded-full bg-gradient-acv p-1 mb-6 logo-glow">
-                        <div class="w-full h-full rounded-full bg-black flex items-center justify-center text-xl font-bold text-white">LA</div>
-                    </div>
+                    <div class="w-20 h-20 rounded-full bg-gradient-acv p-1 mb-6 logo-glow"><div class="w-full h-full rounded-full bg-black flex items-center justify-center text-xl font-bold text-white">LA</div></div>
                     <h3 class="text-white font-bold uppercase text-2xl italic">Lucas Amado</h3>
                     <p class="text-cyan-400 font-mono text-[13px] uppercase tracking-widest mb-4">Business Intelligence</p>
-                    <p class="text-[12px] tracking-widest mb-6 leading-relaxed">Idealizador do ecossistema digital ACV. Especialista em arquitetura de BI, visualização de dados e desenvolvimento de soluções tech.</p>
-                    <div class="flex flex-wrap justify-center gap-2 mb-8">
-                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-cyan-400 uppercase">Power BI</span>
-                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-cyan-400 uppercase">Dev Web</span>
-                    </div>
-                    <a href="https://www.linkedin.com/in/lucas-amado-pedro/" target="_blank" class="text-[10px] text-white hover:text-white transition uppercase tracking-widest underline">LinkedIn</a>
+                    <p class="text-[12px] text-white mb-6 leading-relaxed">Idealizador do ecossistema digital ACV. Especialista em arquitetura de BI, visualização de dados e desenvolvimento de soluções tech.</p>
+                    <div class="flex flex-wrap justify-center gap-2 mb-8"><span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-cyan-400 uppercase">Power BI</span><span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-cyan-400 uppercase">Dev Web</span></div>
+                    <a href="https://www.linkedin.com/in/lucas-amado-pedro/" target="_blank" rel="noopener" class="text-[10px] text-white hover:text-cyan-400 transition uppercase tracking-widest underline">LinkedIn</a>
                 </div>
-
-                <!-- Maicon Cardoso -->
+                <!-- Maicon -->
                 <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col items-center text-center">
-                    <div class="w-20 h-20 rounded-full bg-gradient-acv p-1 mb-6 logo-glow">
-                        <div class="w-full h-full rounded-full bg-black flex items-center justify-center text-xl font-bold text-white">MC</div>
-                    </div>
+                    <div class="w-20 h-20 rounded-full bg-gradient-acv p-1 mb-6 logo-glow"><div class="w-full h-full rounded-full bg-black flex items-center justify-center text-xl font-bold text-white">MC</div></div>
                     <h3 class="text-white font-bold uppercase text-2xl italic">Maicon Cardoso</h3>
                     <p class="text-cyan-400 font-mono text-[13px] uppercase tracking-widest mb-4">Analista Estratégico</p>
-                    <p class="text-[12px] tracking-widest mb-6 leading-relaxed">Especialista em análise de performance e ROI. Transforma métricas brutas em planos de ação táticos para o crescimento do negócio.</p>
-                    <div class="flex flex-wrap justify-center gap-2 mb-8">
-                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-cyan-400 uppercase">KPIs Jurídicos</span>
-                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-cyan-400 uppercase">Market Intelligence</span>
-                    </div>
-                    <a href="https://www.linkedin.com/in/maicon-souza-a942721b4/" target="_blank" class="text-[10px] text-white hover:text-white transition uppercase tracking-widest underline">LinkedIn</a>
+                    <p class="text-[12px] text-white mb-6 leading-relaxed">Especialista em análise de performance e ROI. Transforma métricas brutas em planos de ação táticos para o crescimento do negócio.</p>
+                    <div class="flex flex-wrap justify-center gap-2 mb-8"><span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-cyan-400 uppercase">KPIs Jurídicos</span><span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-cyan-400 uppercase">Market Intelligence</span></div>
+                    <a href="https://www.linkedin.com/in/maicon-souza-a942721b4/" target="_blank" rel="noopener" class="text-[10px] text-white hover:text-cyan-400 transition uppercase tracking-widest underline">LinkedIn</a>
                 </div>
-
-                <!-- Gabriel Petrallas -->
+                <!-- Gabriel -->
                 <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col items-center text-center">
-                    <div class="w-20 h-20 rounded-full bg-gradient-acv p-1 mb-6 logo-glow">
-                        <div class="w-full h-full rounded-full bg-black flex items-center justify-center text-xl font-bold text-white">GP</div>
-                    </div>
+                    <div class="w-20 h-20 rounded-full bg-gradient-acv p-1 mb-6 logo-glow"><div class="w-full h-full rounded-full bg-black flex items-center justify-center text-xl font-bold text-white">GP</div></div>
                     <h3 class="text-white font-bold uppercase text-2xl italic">Gabriel Petrallas</h3>
                     <p class="text-cyan-400 font-mono text-[13px] uppercase tracking-widest mb-4">Analista de TI</p>
-                    <p class="text-[12px] tracking-widest mb-6 leading-relaxed">Focado em integração de sistemas e segurança. Garante que os pipelines de dados fluam com integridade e proteção total.</p>
-                    <div class="flex flex-wrap justify-center gap-2 mb-8">
-                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-cyan-400 uppercase">Integrações</span>
-                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-cyan-400 uppercase">Segurança</span>
-                    </div>
-                    <a href="https://www.linkedin.com/in/gabriel-petrallas-452936249/" target="_blank" class="text-[10px] text-white hover:text-white transition uppercase tracking-widest underline">LinkedIn</a>
+                    <p class="text-[12px] text-white mb-6 leading-relaxed">Focado em integração de sistemas e segurança. Garante que os pipelines de dados fluam com integridade e proteção total.</p>
+                    <div class="flex flex-wrap justify-center gap-2 mb-8"><span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-cyan-400 uppercase">Integrações</span><span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-cyan-400 uppercase">Segurança</span></div>
+                    <a href="https://www.linkedin.com/in/gabriel-petrallas-452936249/" target="_blank" rel="noopener" class="text-[10px] text-white hover:text-cyan-400 transition uppercase tracking-widest underline">LinkedIn</a>
                 </div>
-
-                <!-- Leonardo Muraro -->
+                <!-- Leonardo -->
                 <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col items-center text-center">
-                    <div class="w-20 h-20 rounded-full bg-gradient-acv p-1 mb-6 logo-glow">
-                        <div class="w-full h-full rounded-full bg-black flex items-center justify-center text-xl font-bold text-white">LM</div>
-                    </div>
-                    <h3 class="text-white font-bold uppercase text-xl italic">Leonardo Muraro</h3>
-                    <p class="text-cyan-400 font-mono text-[10px] uppercase tracking-widest mb-4">TI e Infraestrutura</p>
-                    <p class="text-[12px] tracking-widest mb-6 leading-relaxed">Garante a disponibilidade contínua dos sistemas e a robustez da infraestrutura que sustenta a operação analítica.</p>
-                    <div class="flex flex-wrap justify-center gap-2 mb-8">
-                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-cyan-400 uppercase">Sistemas</span>
-                        <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-cyan-400 uppercase">Infraestrutura</span>
-                    </div>
-                    <a href="https://www.linkedin.com/in/leonardo-muraro-37a626263/" target="_blank" class="text-[10px] text-white hover:text-white transition uppercase tracking-widest underline">LinkedIn</a>
-                </div> <!-- FECHA CARD LEONARDO -->
-
-            </div> <!-- FECHA O GRID DA EQUIPE (O QUE ESTAVA FALTANDO) -->
-        </div> <!-- FECHA O MAX-W-7XL (O QUE ESTAVA FALTANDO) -->
-    </div> <!-- FECHA O SUBHUB-EQUIPE (O QUE ESTAVA FALTANDO) -->
-
-    <!-- #################################################################### -->
-    <!-- SUB-HUB CLIENTES (AGORA ELE ESTÁ FORA E VAI APARECER!) -->
-    <!-- #################################################################### -->
-    <div id="subhub-clientes" class="hidden min-h-screen pt-32 pb-20 px-6 relative z-10 text-left">
-        <div class="hero-mesh"></div>
-<div class="max-w-7xl mx-auto">
-    <!-- Header -->
-    <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6 text-left">
-        <div>
-            <button onclick="closeSubHub('clientes')" class="text-cyan-400 text-[10px] font-mono uppercase tracking-[0.4em] mb-4 flex items-center gap-2 hover:translate-x-[-5px] transition-all">
-                <i data-lucide="arrow-left" class="w-3 h-3"></i> Sair do Portal
-            </button>
-            <h2 class="text-5xl font-extrabold text-white uppercase tracking-widest italic text-left">Portal do <span class="text-gradient">Cliente</span></h2>
-            <p class="text-gray-500 mt-2 font-mono text-[13px] uppercase tracking-widest text-left">Selecione o painel da sua cooperativa para visualizar os indicadores</p>
-        </div>
-        <div class="glass px-6 py-2 rounded-full border border-cyan-500/20">
-            <span class="text-[12px] text-cyan-400 font-mono uppercase tracking-widest flex items-center gap-2">
-                <i data-lucide="shield-check" class="w-3 h-3"></i> Acesso Seguro: Cooperativas
-            </span>
+                    <div class="w-20 h-20 rounded-full bg-gradient-acv p-1 mb-6 logo-glow"><div class="w-full h-full rounded-full bg-black flex items-center justify-center text-xl font-bold text-white">LM</div></div>
+                    <h3 class="text-white font-bold uppercase text-2xl italic">Leonardo Muraro</h3>
+                    <p class="text-cyan-400 font-mono text-[13px] uppercase tracking-widest mb-4">TI e Infraestrutura</p>
+                    <p class="text-[12px] text-white mb-6 leading-relaxed">Garante a disponibilidade contínua dos sistemas e a robustez da infraestrutura que sustenta a operação analítica.</p>
+                    <div class="flex flex-wrap justify-center gap-2 mb-8"><span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-cyan-400 uppercase">Sistemas</span><span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] text-cyan-400 uppercase">Infraestrutura</span></div>
+                    <a href="https://www.linkedin.com/in/leonardo-muraro-37a626263/" target="_blank" rel="noopener" class="text-[10px] text-white hover:text-cyan-400 transition uppercase tracking-widest underline">LinkedIn</a>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- GRID DE COOPERATIVAS (7 CARDS) -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        
-        <!-- 1. SICREDI PLANALTO -->
-        <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
-            <div>
-                <i data-lucide="landmark" class="text-purple-500 w-8 h-8 mb-6"></i>
-                <h3 class="text-widest font-bold mb-2 uppercase text-lg italic leading-tight">Sicredi Planalto</h3>
-                <p class="text-[13px] text-gray-500 mb-8 uppercase font-mono">Performance Cooperativa</p>
+    <!-- ====================================================================
+         SUB-HUB: PORTAL DO CLIENTE
+         ==================================================================== -->
+    <div id="subhub-clientes" class="hidden min-h-screen pt-32 pb-20 px-6 relative z-10 text-left">
+        <div class="hero-mesh"></div>
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6 text-left">
+                <div>
+                    <button onclick="closeSubHub('clientes')" class="text-cyan-400 text-[10px] font-mono uppercase tracking-[0.4em] mb-4 flex items-center gap-2 hover:translate-x-[-5px] transition-all"><i data-lucide="arrow-left" class="w-3 h-3"></i> Sair do Portal</button>
+                    <h2 class="text-5xl font-extrabold text-white uppercase tracking-widest italic">Portal do <span class="text-gradient">Cliente</span></h2>
+                    <p class="text-gray-500 mt-2 font-mono text-[13px] uppercase tracking-widest">Selecione o painel da sua cooperativa para visualizar os indicadores</p>
+                </div>
+                <div class="glass px-6 py-2 rounded-full border border-cyan-500/20"><span class="text-[12px] text-cyan-400 font-mono uppercase tracking-widest flex items-center gap-2"><i data-lucide="shield-check" class="w-3 h-3"></i> Acesso Seguro: Cooperativas</span></div>
             </div>
-            <a href="https://app.powerbi.com/view?r=eyJrIjoiOWI1ZWU1NWEtNDMxYi00Mzc4LWI0NjAtOGZlMzhiMDIzMWMyIiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[10px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar BI</a>
-        </div>
-
-        <!-- 2. SICREDI NORTE -->
-        <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
-            <div>
-                <i data-lucide="landmark" class="text-cyan-400 w-8 h-8 mb-6"></i>
-                <h3 class="text-widest font-bold mb-2 uppercase text-lg italic leading-tight">Sicredi Norte</h3>
-                <p class="text-[13px] text-gray-500 mb-8 uppercase font-mono">Performance Cooperativa</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
+                    <div><i data-lucide="landmark" class="text-purple-500 w-8 h-8 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-lg italic leading-tight">Sicredi Planalto</h3><p class="text-[13px] text-gray-500 mb-8 uppercase font-mono">Performance Cooperativa</p></div>
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiOWI1ZWU1NWEtNDMxYi00Mzc4LWI0NjAtOGZlMzhiMDIzMWMyIiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" rel="noopener" class="btn-shine w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[10px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar BI</a>
+                </div>
+                <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
+                    <div><i data-lucide="landmark" class="text-cyan-400 w-8 h-8 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-lg italic leading-tight">Sicredi Norte</h3><p class="text-[13px] text-gray-500 mb-8 uppercase font-mono">Performance Cooperativa</p></div>
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiYmE2OWNiZTMtMmY1YS00YjY2LWJmMDctYmI0YWMxNTFkMzJhIiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" rel="noopener" class="btn-shine w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[10px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar BI</a>
+                </div>
+                <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
+                    <div><i data-lucide="landmark" class="text-purple-500 w-8 h-8 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-lg italic leading-tight">Sicredi Sudoeste</h3><p class="text-[13px] text-gray-500 mb-8 uppercase font-mono">Performance Cooperativa</p></div>
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiMWJlMzAyMmYtMjM0NC00YmNjLWJlYWItNWRiMjliNmIxNWJlIiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" rel="noopener" class="btn-shine w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[10px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar BI</a>
+                </div>
+                <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
+                    <div><i data-lucide="building-2" class="text-cyan-400 w-8 h-8 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-lg italic leading-tight">Sicoob Unique</h3><p class="text-[13px] text-gray-500 mb-8 uppercase font-mono">Performance Cooperativa</p></div>
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiN2I1MGZiYTktOTI1Yy00YzFiLWFkY2MtNmI3ZDcxMmE2ZTA0IiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" rel="noopener" class="btn-shine w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[10px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar BI</a>
+                </div>
+                <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
+                    <div><i data-lucide="building-2" class="text-purple-500 w-8 h-8 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-lg italic leading-tight">Sicoob Uni Sul</h3><p class="text-[13px] text-gray-500 mb-8 uppercase font-mono">Performance Cooperativa</p></div>
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiYjcyZGYwNTItYjI2Ni00YzZjLWFkZTItMGJmYTMyYjlkMzJhIiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" rel="noopener" class="btn-shine w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[10px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar BI</a>
+                </div>
+                <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
+                    <div><i data-lucide="briefcase" class="text-cyan-400 w-8 h-8 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-lg italic leading-tight">Cresol</h3><p class="text-[13px] text-gray-500 mb-8 uppercase font-mono">Performance Cooperativa</p></div>
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiMzBjMWYwZWUtN2JkZi00NGI4LWFmMWUtYzdlNzE2ZjI2YTk3IiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" rel="noopener" class="btn-shine w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[10px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar BI</a>
+                </div>
+                <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
+                    <div><i data-lucide="building-2" class="text-purple-500 w-8 h-8 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-lg italic leading-tight">Sicoob CooperCred</h3><p class="text-[13px] text-gray-500 mb-8 uppercase font-mono">Performance Cooperativa</p></div>
+                    <a href="https://app.powerbi.com/view?r=eyJrIjoiZGVjMzFlODQtNGY3OC00NGI2LWI0NGItMTk5OGMzYjFjNWRiIiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" rel="noopener" class="btn-shine w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[10px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar BI</a>
+                </div>
             </div>
-            <a href="https://app.powerbi.com/view?r=eyJrIjoiYmE2OWNiZTMtMmY1YS00YjY2LWJmMDctYmI0YWMxNTFkMzJhIiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[10px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar BI</a>
         </div>
+    </div>
 
-        <!-- 3. SICREDI SUDOESTE -->
-        <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
-            <div>
-                <i data-lucide="landmark" class="text-purple-500 w-8 h-8 mb-6"></i>
-                <h3 class="text-widest font-bold mb-2 uppercase text-lg italic leading-tight">Sicredi Sudoeste</h3>
-                <p class="text-[13px] text-gray-500 mb-8 uppercase font-mono">Performance Cooperativa</p>
+    <!-- ====================================================================
+         SUB-HUB: FAVORITOS (preenchido dinamicamente via localStorage)
+         ==================================================================== -->
+    <div id="subhub-favoritos" class="hidden min-h-screen pt-32 pb-20 px-6 relative z-10 text-left">
+        <div class="hero-mesh"></div>
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div>
+                    <button onclick="closeSubHub('favoritos')" class="text-cyan-400 text-[10px] font-mono uppercase tracking-[0.4em] mb-4 flex items-center gap-2 hover:translate-x-[-5px] transition-all"><i data-lucide="arrow-left" class="w-3 h-3"></i> Voltar ao Menu Principal</button>
+                    <h2 class="text-5xl font-extrabold text-white uppercase tracking-widest italic">Meus <span class="text-gradient">Favoritos</span></h2>
+                    <p class="text-gray-500 mt-2 font-mono text-[12px] uppercase tracking-widest">Acesso rápido aos painéis que você fixou</p>
+                </div>
+                <div class="glass px-6 py-2 rounded-full border border-yellow-500/20"><span class="text-[12px] text-yellow-500 font-mono uppercase tracking-widest flex items-center gap-2"><i data-lucide="star" class="w-3 h-3"></i> Salvos neste navegador</span></div>
             </div>
-            <a href="https://app.powerbi.com/view?r=eyJrIjoiMWJlMzAyMmYtMjM0NC00YmNjLWJlYWItNWRiMjliNmIxNWJlIiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[10px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar BI</a>
+            <div id="favoritos-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         </div>
+    </div>
 
-        <!-- 4. SICOOB UNIQUE -->
-        <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
-            <div>
-                <i data-lucide="building-2" class="text-cyan-400 w-8 h-8 mb-6"></i>
-                <h3 class="text-widest font-bold mb-2 uppercase text-lg italic leading-tight">Sicoob Unique</h3>
-                <p class="text-[13px] text-gray-500 mb-8 uppercase font-mono">Performance Cooperativa</p>
-            </div>
-            <a href="https://app.powerbi.com/view?r=eyJrIjoiN2I1MGZiYTktOTI1Yy00YzFiLWFkY2MtNmI3ZDcxMmE2ZTA0IiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[10px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar BI</a>
-        </div>
+    <!-- BOTÃO VOLTAR AO TOPO -->
+    <button id="to-top" onclick="scrollToTop()" aria-label="Voltar ao topo"><i data-lucide="arrow-up" class="w-5 h-5"></i></button>
 
-        <!-- 5. SICOOB UNI SUL -->
-        <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
-            <div>
-                <i data-lucide="building-2" class="text-purple-500 w-8 h-8 mb-6"></i>
-                <h3 class="text-widest font-bold mb-2 uppercase text-lg italic leading-tight">Sicoob Uni Sul</h3>
-                <p class="text-[13px] text-gray-500 mb-8 uppercase font-mono">Performance Cooperativa</p>
-            </div>
-            <a href="https://app.powerbi.com/view?r=eyJrIjoiYjcyZGYwNTItYjI2Ni00YzZjLWFkZTItMGJmYTMyYjlkMzJhIiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[10px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar BI</a>
-        </div>
-
-        <!-- 6. CRESOL -->
-        <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
-            <div>
-                <i data-lucide="briefcase" class="text-cyan-400 w-8 h-8 mb-6"></i>
-                <h3 class="text-widest font-bold mb-2 uppercase text-lg italic leading-tight">Cresol</h3>
-                <p class="text-[13px] text-gray-500 mb-8 uppercase font-mono">Performance Cooperativa</p>
-            </div>
-            <a href="https://app.powerbi.com/view?r=eyJrIjoiMzBjMWYwZWUtN2JkZi00NGI4LWFmMWUtYzdlNzE2ZjI2YTk3IiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[10px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar BI</a>
-        </div>
-
-        <!-- 7. SICOOB COOPERCRED -->
-        <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
-            <div>
-                <i data-lucide="building-2" class="text-purple-500 w-8 h-8 mb-6"></i>
-                <h3 class="text-widest font-bold mb-2 uppercase text-lg italic leading-tight">Sicoob CooperCred</h3>
-                <p class="text-[13px] text-gray-500 mb-8 uppercase font-mono">Performance Cooperativa</p>
-            </div>
-            <a href="https://app.powerbi.com/view?r=eyJrIjoiZGVjMzFlODQtNGY3OC00NGI2LWI0NGItMTk5OGMzYjFjNWRiIiwidCI6ImFmOTVjMGJhLTUyMzgtNDdkZi04ZmM0LWFhMTgyZTc0ZTUzOCJ9" target="_blank" class="w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[10px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar BI</a>
-        </div>
-
-    </div> <!-- Fim do Grid -->
-</div> <!-- Fim do Max-W -->
-      
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-<script src="script.js"></script>
-
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script src="script.js"></script>
 </body>
 </html>
