@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Página não encontrada | ACV Intelligence</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/png" href="logo-acv.png">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root { --acv-purple: #9d4edd; --acv-cyan: #00d4ff; }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0; min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            background: #000; color: #e2e8f0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            text-align: center; padding: 24px; overflow: hidden;
+        }
+        .mesh {
+            position: fixed; inset: 0; z-index: -1;
+            background-image:
+                radial-gradient(circle at 25% 30%, rgba(157,78,221,0.18) 0%, transparent 50%),
+                radial-gradient(circle at 75% 70%, rgba(0,212,255,0.14) 0%, transparent 50%);
+        }
+        img { width: 90px; margin-bottom: 32px; filter: drop-shadow(0 0 14px rgba(157,78,221,0.5)); }
+        h1 {
+            font-size: clamp(80px, 22vw, 180px); font-weight: 800; line-height: 1; margin: 0;
+            background: linear-gradient(135deg, var(--acv-purple), var(--acv-cyan));
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent; color: transparent;
+        }
+        p.title { font-size: 18px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.3em; margin: 16px 0 8px; }
+        p.sub { color: #94a3b8; font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.1em; max-width: 420px; }
+        a.btn {
+            display: inline-block; margin-top: 36px; padding: 16px 40px;
+            background: linear-gradient(135deg, var(--acv-purple), var(--acv-cyan));
+            color: #000; font-weight: 800; text-transform: uppercase; letter-spacing: 0.2em;
+            font-size: 12px; text-decoration: none; border-radius: 4px;
+            box-shadow: 0 0 24px rgba(157,78,221,0.35); transition: opacity 0.25s, transform 0.25s;
+        }
+        a.btn:hover { opacity: 0.9; transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+    <div class="mesh"></div>
+    <img src="logo-acv.png" alt="ACV Intelligence">
+    <h1>404</h1>
+    <p class="title">Página não encontrada</p>
+    <p class="sub">O endereço que você tentou acessar não existe ou foi movido. Volte ao hub para acessar os dashboards.</p>
+    <a class="btn" href="/">Voltar ao Hub</a>
+</body>
+</html>
