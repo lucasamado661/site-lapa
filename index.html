@@ -203,6 +203,17 @@
                 <h2 class="text-4xl font-bold text-white uppercase tracking-widest italic">Central de Dashboards Setoriais</h2>
                 <p class="text-gray-500 mt-2 font-mono text-[13px] uppercase tracking-[0.3em]">Acesse o painel de controle da sua respectiva área</p>
             </div>
+
+            <!-- BUSCA DE PAINÉIS -->
+            <div class="reveal max-w-xl mb-12 relative">
+                <div class="search-wrap">
+                    <i data-lucide="search" class="search-icon w-4 h-4"></i>
+                    <label for="painel-search" class="sr-only">Buscar painel</label>
+                    <input id="painel-search" type="text" autocomplete="off" placeholder="Buscar painel... (ex: Sicoob, Controladoria, BSF)" class="input-field font-mono text-sm">
+                </div>
+                <div id="search-results"></div>
+            </div>
+
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
                 <div class="reveal glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
                     <div><i data-lucide="scale" class="text-purple-500 w-10 h-10 mb-6"></i><h3 class="text-white font-bold mb-2 uppercase text-lg">Jurídico</h3><p class="text-[13px] text-gray-500 mb-8">Controle de prazos e jurimetria.</p></div>
