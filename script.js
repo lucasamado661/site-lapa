@@ -1,211 +1,413 @@
-       // 1. INICIALIZAÇÃO DE ÍCONES
-lucide.createIcons();
+     /* ==========================================================================
+   ACV INTELLIGENCE — Hub de Dados | script.js
+   Refino técnico 2026: login com hash, navegação mobile, efeitos de scroll,
+   contagem animada, preloader, tilt 3D e favoritos.
+   --------------------------------------------------------------------------
+   AVISO DE SEGURANÇA (LEIA):
+   Este controle de acesso roda 100% no navegador. O hash abaixo evita que a
+   senha apareça em texto puro no código, MAS não é segurança real: qualquer
+   pessoa com conhecimento técnico consegue contornar um login client-side.
+   Para proteção de verdade dos painéis sensíveis, use uma das opções do
+   plano de migração (Cloudflare Access / Netlify Identity / segurança nativa
+   do Power BI).
+   ========================================================================== */
 
-// 2. DADOS DA EQUIPE
-const membrosEquipe = [
-    {
-        nome: "Jhenny Mugart",
-        cargo: "Coordenadora do Nucleo de intelligence ACV",
-        iniciais: "JM",
-        desc: "Liderança estratégica e governança. Responsável pela visão macro e alinhamento da inteligência com os objetivos do escritório.",
-        skills: ["Gestão", "Estratégia"],
-        link: "#"
-    },
-    {
-        nome: "Lucas Amado",
-        cargo: "Business Intelligence",
-        iniciais: "LA",
-        desc: "Idealizador do ecossistema digital ACV. Especialista em arquitetura de BI, visualização de dados e soluções tech.",
-        skills: ["Power BI", "Dev Web"],
-        link: "#",
-        destaque: true
-    },
-    {
-        nome: "Maicon Cardoso",
-        cargo: "Analista Estratégico",
-        iniciais: "MC",
-        desc: "Transforma métricas brutas em planos de ação táticos para o crescimento do negócio.",
-        skills: ["KPIs", "Market Intel"],
-        link: "#"
-    },
-    {
-        nome: "Gabriel Petrallas",
-        cargo: "Analista de TI",
-        iniciais: "GP",
-        desc: "Focado em integração de sistemas e segurança. Garante que os pipelines de dados fluam com proteção total.",
-        skills: ["Integrações", "Segurança"],
-        link: "#"
-    },
-    {
-        nome: "Leonardo Muraro",
-        cargo: "Assistente de TI e Infraestrutura",
-        iniciais: "LM",
-        desc: "Garante a disponibilidade contínua dos sistemas e a robustez da infraestrutura operacional.",
-        skills: ["Sistemas", "Infra"],
-        link: "#"
+'use strict';
+
+/* --------------------------------------------------------------------------
+   1. INICIALIZAÇÃO DE ÍCONES
+   -------------------------------------------------------------------------- */
+function renderIcons() {
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons();
     }
-];
-
-// 3. FUNÇÃO PARA DESENHAR A EQUIPE (Renderização Dinâmica)
-function renderEquipe() {
-    const container = document.getElementById('equipe-container');
-    if (!container) return;
-
-    container.innerHTML = membrosEquipe.map(m => `
-        <div class="glass p-8 rounded-xl border ${m.destaque ? 'border-cyan-500/50 shadow-[0_0_20px_rgba(0,242,255,0.1)]' : 'border-white/5'} card-portal flex flex-col items-center text-center">
-            <div class="w-20 h-20 rounded-full bg-gradient-acv p-1 mb-6 logo-glow">
-                <div class="w-full h-full rounded-full bg-black flex items-center justify-center text-xl font-bold text-white">${m.iniciais}</div>
-            </div>
-            <h3 class="text-white font-bold uppercase text-xl italic">${m.nome}</h3>
-            <p class="text-cyan-400 font-mono text-[10px] uppercase tracking-widest mb-4">${m.cargo}</p>
-            <p class="text-[12px] text-gray-500 mb-6 leading-relaxed">${m.desc}</p>
-            <div class="flex flex-wrap justify-center gap-2 mb-8">
-                ${m.skills.map(s => `<span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-[9px] text-gray-400 uppercase">${s}</span>`).join('')}
-            </div>
-            <a href="${m.link}" target="_blank" class="text-[10px] text-gray-500 hover:text-white transition uppercase tracking-widest underline">LinkedIn</a>
-        </div>
-    `).join('');
 }
+renderIcons();
 
-// 4. LÓGICA DE NAVEGAÇÃO E ACESSOS
-let targetArea = ""; 
-
-const acessos = {
-    'juridico':   { user: 'acv.jur',   pass: 'jur123' },
-    'financeiro': { user: 'acv.fin',   pass: 'fin456' },
-    'rh':         { user: 'acv.rh',    pass: 'rh789' },
-    'diretoria':  { user: 'acv.diret', pass: 'master2026' },
-    'clientes':   { user: 'cliente.acv', pass: 'acv2026' } // ADICIONE ESTA LINHA
+/* --------------------------------------------------------------------------
+   2. CONTROLE DE ACESSO (hash SHA-256 de "usuario:senha")
+   -------------------------------------------------------------------------- */
+// Hashes pré-calculados. Para gerar um novo:  echo -n "usuario:senha" | sha256sum
+const ACESSOS = {
+    juridico:   '73dc7c54ed24e98e248b5a28bbde5303553287eae32233ed9ed019630d362b60',
+    financeiro: '65836f5d98073a01f17f71b3607abc188db3ebfe7205ec908138cf1a77f740d1',
+    rh:         'fb7692f5cd8e1a7c963e6c17ff31d8bd4a0f3e4227053651e5609861b67b3d98',
+    diretoria:  '69ccc1a44a0d77b9d90f55cbdd3e5db3045e5f467cbf5856699333bb50bc1136',
+    clientes:   '3fc98d7469d1261cc1c2c54523cd12b72ad138c22d45f8656269d5bb457228b0'
 };
 
-// Abre o Modal de Login para áreas restritas
+const HUBS = ['juridico', 'financeiro', 'rh', 'diretoria', 'equipe', 'clientes', 'favoritos'];
+
+let targetArea = '';
+
+async function sha256(text) {
+    const data = new TextEncoder().encode(text);
+    const buffer = await crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(buffer))
+        .map(b => b.toString(16).padStart(2, '0'))
+        .join('');
+}
+
+/* --------------------------------------------------------------------------
+   3. CONTROLE DO MODAL DE LOGIN
+   -------------------------------------------------------------------------- */
+const loginScreen = () => document.getElementById('login-screen');
+
 function requestLogin(area) {
     targetArea = area;
-    document.getElementById('login-screen').style.display = 'flex';
-    document.body.style.overflow = 'hidden'; 
-    document.getElementById('username').value = "";
-    document.getElementById('password').value = "";
+    const screen = loginScreen();
+    screen.style.display = 'flex';
+    requestAnimationFrame(() => screen.classList.add('visible'));
+    document.body.classList.add('no-scroll');
+
+    document.getElementById('username').value = '';
+    document.getElementById('password').value = '';
     document.getElementById('error-msg').classList.add('hidden');
-}
-
-// Abre áreas DIRETAMENTE (como a Equipe, se você não quiser senha)
-function openSubHub(area) {
-    // 1. Esconde o site principal
-    document.getElementById('site-content').style.display = 'none';
-    
-    // 2. Esconde TODOS os sub-hubs antes (para não sobrepor)
-    const hubs = ['juridico', 'financeiro', 'rh', 'diretoria', 'equipe', 'clientes'];
-    hubs.forEach(h => {
-        const el = document.getElementById(`subhub-${h}`);
-        if(el) el.classList.add('hidden');
-    });
-
-    // 3. Mostra apenas o que foi clicado
-    const targetEl = document.getElementById(`subhub-${area}`);
-    if(targetEl) {
-        targetEl.classList.remove('hidden');
-    }
-
-    // 4. Se for equipe, desenha os cards
-    if(area === 'equipe') renderEquipe();
-    
-    window.scrollTo(0, 0);
-}
-
-// Valida o login e abre a área
-function validateLogin() {
-    const user = document.getElementById('username').value;
-    const pass = document.getElementById('password').value;
-    const errorMsg = document.getElementById('error-msg');
-
-    if (user === acessos[targetArea].user && pass === acessos[targetArea].pass) {
-        document.getElementById('login-screen').style.display = 'none';
-        openSubHub(targetArea); // Reutiliza a função de abrir
-    } else {
-        errorMsg.classList.remove('hidden');
-        document.querySelector('.login-box').animate([{ transform: 'translateX(-5px)' }, { transform: 'translateX(5px)' }], { duration: 100, iterations: 3 });
-    }
-}
-
-// Fecha qualquer Sub-Hub e volta à Home
-function closeSubHub(area) {
-    const idMap = {
-        'juridico': 'subhub-juridico',
-        'financeiro': 'subhub-financeiro',
-        'rh': 'subhub-rh',
-        'diretoria': 'subhub-diretoria',
-        'equipe': 'subhub-equipe',
-        'clientes': 'subhub-clientes' // ADICIONE ESTA LINHA
-    };
-    
-    document.getElementById(idMap[area]).classList.add('hidden');
-    document.getElementById('site-content').style.display = 'block';
-    document.body.style.overflow = 'auto';
-    window.scrollTo(0, 0);
+    setTimeout(() => document.getElementById('username').focus(), 80);
 }
 
 function cancelLogin() {
-    document.getElementById('login-screen').style.display = 'none';
-    document.body.style.overflow = 'auto';
+    const screen = loginScreen();
+    screen.classList.remove('visible');
+    document.body.classList.remove('no-scroll');
+    setTimeout(() => { screen.style.display = 'none'; }, 350);
 }
 
-document.addEventListener('keypress', function (e) { if (e.key === 'Enter') validateLogin(); });
+async function validateLogin() {
+    const user = document.getElementById('username').value.trim();
+    const pass = document.getElementById('password').value;
+    const errorMsg = document.getElementById('error-msg');
+    const box = document.querySelector('.login-box');
 
-/* CONFIGURAÇÃO PARTICULAS ACV */
-particlesJS("particles-js", {
-  "particles": {
-    "number": { "value": 100, "density": { "enable": true, "value_area": 800 } },
-    "color": { "value": ["#00d4ff", "#9d4edd"] }, // Alterna entre Ciano e Roxo
-    "shape": { "type": "circle" },
-    "opacity": { "value": 0.4, "random": true },
-    "size": { "value": 2, "random": true },
-    "line_linked": {
-      "enable": true,
-      "distance": 150,
-      "color": "#ffffff",
-      "opacity": 0.1,
-      "width": 1
-    },
-    "move": {
-      "enable": true,
-      "speed": 1.5,
-      "direction": "none",
-      "random": true,
-      "straight": false,
-      "out_mode": "out",
-      "bounce": false
-    }
-  },
-  "interactivity": {
-    "detect_on": "canvas",
-    "events": {
-      "onhover": { "enable": true, "mode": "grab" },
-      "onclick": { "enable": true, "mode": "push" },
-      "resize": true
-    },
-    "modes": {
-      "grab": { "distance": 200, "line_linked": { "opacity": 0.5 } }
-    }
-  },
-  "retina_detect": true
-});
+    const hash = await sha256(`${user}:${pass}`);
 
-// LÓGICA DE REVELAÇÃO AO ROLAR (SCROLL REVEAL)
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-        }
+    if (hash === ACESSOS[targetArea]) {
+        cancelLogin();
+        setTimeout(() => openSubHub(targetArea), 200);
+    } else {
+        errorMsg.classList.remove('hidden');
+        box.classList.remove('shake');
+        void box.offsetWidth;            // força reinício da animação
+        box.classList.add('shake');
+    }
+}
+
+/* --------------------------------------------------------------------------
+   4. NAVEGAÇÃO ENTRE SUB-HUBS
+   -------------------------------------------------------------------------- */
+function openSubHub(area) {
+    document.getElementById('site-content').style.display = 'none';
+
+    HUBS.forEach(h => {
+        const el = document.getElementById(`subhub-${h}`);
+        if (el) el.classList.add('hidden');
     });
-}, {
-    threshold: 0.1 // O efeito dispara quando 10% do elemento aparece na tela
+
+    const targetEl = document.getElementById(`subhub-${area}`);
+    if (targetEl) targetEl.classList.remove('hidden');
+
+    if (area === 'favoritos') renderFavoritos();
+
+    renderIcons();           // garante ícones nas seções recém-exibidas
+    window.scrollTo(0, 0);
+}
+
+function closeSubHub(area) {
+    const el = document.getElementById(`subhub-${area}`);
+    if (el) el.classList.add('hidden');
+    document.getElementById('site-content').style.display = 'block';
+    document.body.classList.remove('no-scroll');
+    window.scrollTo(0, 0);
+}
+
+/* --------------------------------------------------------------------------
+   5. MENU MOBILE
+   -------------------------------------------------------------------------- */
+function toggleMobileMenu(force) {
+    const menu = document.getElementById('mobile-menu');
+    if (!menu) return;
+    const willOpen = force !== undefined ? force : !menu.classList.contains('open');
+    menu.classList.toggle('open', willOpen);
+    document.body.classList.toggle('no-scroll', willOpen);
+}
+
+/* --------------------------------------------------------------------------
+   6. EVENTOS GLOBAIS
+   -------------------------------------------------------------------------- */
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && loginScreen() && loginScreen().style.display === 'flex') {
+        validateLogin();
+    }
+    if (e.key === 'Escape') {
+        if (loginScreen() && loginScreen().style.display === 'flex') cancelLogin();
+        toggleMobileMenu(false);
+    }
 });
 
-// Seleciona todos os elementos que devem ser revelados
+function onScroll() {
+    const nav = document.getElementById('main-nav');
+    const toTop = document.getElementById('to-top');
+    const y = window.scrollY;
+    if (nav) nav.classList.toggle('scrolled', y > 40);
+    if (toTop) toTop.classList.toggle('show', y > 600);
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* --------------------------------------------------------------------------
+   7. SCROLL REVEAL
+   -------------------------------------------------------------------------- */
 function initScrollReveal() {
     const elements = document.querySelectorAll('.reveal');
-    elements.forEach((el) => observer.observe(el));
+    if (!('IntersectionObserver' in window) || !elements.length) {
+        elements.forEach(el => el.classList.add('active'));
+        return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12 });
+    elements.forEach(el => observer.observe(el));
 }
 
-// Inicia a função
-initScrollReveal();
+/* --------------------------------------------------------------------------
+   8. PARTÍCULAS (reduz carga no mobile e respeita reduced-motion)
+   -------------------------------------------------------------------------- */
+function initParticles() {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion || typeof particlesJS !== 'function') return;
+
+    const isMobile = window.innerWidth < 768;
+    particlesJS('particles-js', {
+        particles: {
+            number: { value: isMobile ? 40 : 100, density: { enable: true, value_area: 800 } },
+            color: { value: ['#00d4ff', '#9d4edd'] },
+            shape: { type: 'circle' },
+            opacity: { value: 0.4, random: true },
+            size: { value: 2, random: true },
+            line_linked: { enable: true, distance: 150, color: '#ffffff', opacity: 0.1, width: 1 },
+            move: { enable: true, speed: 1.5, direction: 'none', random: true, straight: false, out_mode: 'out', bounce: false }
+        },
+        interactivity: {
+            detect_on: 'canvas',
+            events: {
+                onhover: { enable: !isMobile, mode: 'grab' },
+                onclick: { enable: true, mode: 'push' },
+                resize: true
+            },
+            modes: { grab: { distance: 200, line_linked: { opacity: 0.5 } } }
+        },
+        retina_detect: true
+    });
+}
+
+/* --------------------------------------------------------------------------
+   9. PRELOADER
+   -------------------------------------------------------------------------- */
+function hidePreloader() {
+    const p = document.getElementById('preloader');
+    if (p) p.classList.add('hidden-loader');
+}
+window.addEventListener('load', hidePreloader);
+setTimeout(hidePreloader, 2500);   // fallback de seguranca
+
+/* --------------------------------------------------------------------------
+   10. CONTAGEM ANIMADA DOS NUMEROS (count-up)
+   -------------------------------------------------------------------------- */
+function animateCount(el) {
+    const target = parseFloat(el.dataset.count);
+    const decimals = parseInt(el.dataset.decimals || '0', 10);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const duration = 1500;
+    const start = performance.now();
+
+    function frame(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);            // easeOutCubic
+        el.textContent = prefix + (target * eased).toFixed(decimals) + suffix;
+        if (p < 1) requestAnimationFrame(frame);
+        else el.textContent = prefix + target.toFixed(decimals) + suffix;
+    }
+    requestAnimationFrame(frame);
+}
+
+function initCountUp() {
+    const els = document.querySelectorAll('[data-count]');
+    if (!('IntersectionObserver' in window)) { els.forEach(animateCount); return; }
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) { animateCount(e.target); obs.unobserve(e.target); }
+        });
+    }, { threshold: 0.5 });
+    els.forEach(el => obs.observe(el));
+}
+
+/* --------------------------------------------------------------------------
+   11. TILT 3D NOS CARDS (segue o mouse)
+   -------------------------------------------------------------------------- */
+function bindTilt(card) {
+    if (card.dataset.tiltBound) return;
+    card.dataset.tiltBound = '1';
+    const MAX = 8;   // graus
+
+    card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width;
+        const py = (e.clientY - r.top) / r.height;
+        const rx = (py - 0.5) * -2 * MAX;
+        const ry = (px - 0.5) *  2 * MAX;
+        card.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
+        card.classList.add('tilting');
+    });
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+        card.classList.remove('tilting');
+    });
+}
+
+function initTilt(root) {
+    root = root || document;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isTouch = window.matchMedia('(hover: none)').matches;
+    if (reduce || isTouch) return;
+    root.querySelectorAll('.card-portal').forEach(bindTilt);
+}
+
+/* --------------------------------------------------------------------------
+   12. FAVORITOS (localStorage)
+   -------------------------------------------------------------------------- */
+const FAV_KEY = 'acv_favoritos';
+
+function getFavs() {
+    try { return JSON.parse(localStorage.getItem(FAV_KEY)) || []; }
+    catch (_) { return []; }
+}
+function saveFavs(list) {
+    try { localStorage.setItem(FAV_KEY, JSON.stringify(list)); }
+    catch (_) { /* navegador sem localStorage — ignora */ }
+}
+function isFav(href) { return getFavs().some(f => f.href === href); }
+
+function toggleFav(item, starEl) {
+    let list = getFavs();
+    if (list.some(f => f.href === item.href)) {
+        list = list.filter(f => f.href !== item.href);
+        if (starEl) starEl.classList.remove('is-fav');
+    } else {
+        list.push(item);
+        if (starEl) starEl.classList.add('is-fav');
+    }
+    saveFavs(list);
+}
+
+function cardToItem(card) {
+    const link = card.querySelector('a[href^="http"]');
+    if (!link) return null;          // ignora cards sem painel real
+    return {
+        href: link.href,
+        title: (card.querySelector('h3') ? card.querySelector('h3').textContent : 'Painel').trim(),
+        desc: (card.querySelector('p') ? card.querySelector('p').textContent : '').trim(),
+        icon: card.querySelector('[data-lucide]') ? card.querySelector('[data-lucide]').getAttribute('data-lucide') : 'bar-chart-3'
+    };
+}
+
+function makeStar(item) {
+    const btn = document.createElement('button');
+    btn.className = 'fav-star' + (isFav(item.href) ? ' is-fav' : '');
+    btn.setAttribute('aria-label', 'Favoritar ' + item.title);
+    btn.innerHTML = '<i data-lucide="star" class="w-4 h-4"></i>';
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleFav(item, btn);
+        renderIcons();
+    });
+    return btn;
+}
+
+function initFavorites() {
+    const cards = document.querySelectorAll('[id^="subhub-"]:not(#subhub-favoritos) .card-portal');
+    cards.forEach(card => {
+        if (card.querySelector('.fav-star')) return;
+        const item = cardToItem(card);
+        if (!item) return;
+        card.appendChild(makeStar(item));
+    });
+    renderIcons();
+}
+
+function renderFavoritos() {
+    const grid = document.getElementById('favoritos-grid');
+    if (!grid) return;
+    const favs = getFavs();
+
+    if (!favs.length) {
+        grid.innerHTML =
+            '<div class="fav-empty col-span-full">' +
+            '<i data-lucide="star-off" class="w-10 h-10 mx-auto"></i>' +
+            '<p class="uppercase tracking-widest text-sm">Nenhum favorito ainda</p>' +
+            '<p class="text-[12px] mt-2">Clique na estrela de qualquer painel para fixa-lo aqui.</p>' +
+            '</div>';
+        renderIcons();
+        return;
+    }
+
+    grid.innerHTML = favs.map(f => `
+        <div class="glass p-8 rounded-xl border border-white/5 card-portal flex flex-col justify-between">
+            <button class="fav-star is-fav" data-href="${f.href}" aria-label="Remover ${f.title}"><i data-lucide="star" class="w-4 h-4"></i></button>
+            <div>
+                <i data-lucide="${f.icon}" class="text-cyan-400 w-10 h-10 mb-6"></i>
+                <h3 class="text-white font-bold mb-2 uppercase text-xl italic">${f.title}</h3>
+                <p class="text-[13px] text-gray-500 mb-8 leading-relaxed">${f.desc}</p>
+            </div>
+            <a href="${f.href}" target="_blank" rel="noopener" class="btn-shine w-full text-center py-4 bg-white/5 hover:bg-cyan-500 hover:text-black transition font-bold text-[12px] uppercase tracking-widest border border-white/10 rounded-sm">Acessar Painel</a>
+        </div>`).join('');
+
+    grid.querySelectorAll('.fav-star').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const href = btn.dataset.href;
+            saveFavs(getFavs().filter(f => f.href !== href));
+            document.querySelectorAll('.fav-star').forEach(s => {
+                const card = s.closest('.card-portal');
+                const link = card && card.querySelector('a[href^="http"]');
+                if (link && link.href === href) s.classList.remove('is-fav');
+            });
+            renderFavoritos();
+        });
+    });
+
+    initTilt(grid);
+    renderIcons();
+}
+
+/* --------------------------------------------------------------------------
+   13. BOOTSTRAP
+   -------------------------------------------------------------------------- */
+document.addEventListener('DOMContentLoaded', () => {
+    renderIcons();
+    initScrollReveal();
+    initParticles();
+    initCountUp();
+    initFavorites();
+    initTilt();
+    onScroll();
+});
+
+/* Expõe funções usadas em atributos onclick do HTML */
+window.requestLogin = requestLogin;
+window.validateLogin = validateLogin;
+window.cancelLogin = cancelLogin;
+window.openSubHub = openSubHub;
+window.closeSubHub = closeSubHub;
+window.toggleMobileMenu = toggleMobileMenu;
+window.scrollToTop = scrollToTop;
