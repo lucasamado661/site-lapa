@@ -88,36 +88,27 @@
                     <span class="text-[10px] font-mono tracking-[0.3em] text-gray-400 hidden sm:block uppercase">Núcleo de Inteligência e Dados</span>
                 </a>
 
-                <!-- Links desktop -->
-                <div class="hidden md:flex items-center gap-10 text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400">
+                <!-- Links desktop (inline na barra) -->
+                <div class="hidden lg:flex items-center gap-6 xl:gap-8 text-[10px] font-bold uppercase tracking-[0.18em] text-gray-400">
                     <a href="#manifesto" class="nav-link hover:text-white transition">Missão</a>
-                    <div class="relative group">
-                        <button class="flex items-center gap-1 text-cyan-400 font-extrabold border-b border-cyan-400 hover:text-white transition uppercase">
-                            Menu <i data-lucide="chevron-down" class="w-3 h-3"></i>
-                        </button>
-                        <div class="absolute right-0 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                            <div class="glass border border-white/10 w-56 flex flex-col shadow-2xl text-left">
-                                <a href="#portal" class="px-5 py-4 hover:bg-white/5 hover:text-cyan-400 transition border-b border-white/5 uppercase font-bold">Dashboards</a>
-                                <button onclick="openSubHub('favoritos')" class="px-5 py-4 hover:bg-white/5 hover:text-cyan-400 transition border-b border-white/5 uppercase font-bold text-left w-full flex items-center gap-2"><i data-lucide="star" class="w-3 h-3"></i> Favoritos</button>
-                                <button onclick="openSubHub('equipe')" class="px-5 py-4 hover:bg-white/5 hover:text-cyan-400 transition border-b border-white/5 uppercase font-bold text-left w-full">Nossa Equipe</button>
-                                <button onclick="requestLogin('clientes')" class="px-5 py-4 hover:bg-white/5 hover:text-cyan-400 transition border-b border-white/5 uppercase font-bold text-left w-full">Área do Cliente</button>
-                                <a href="#areas" class="px-5 py-4 hover:bg-white/5 hover:text-white transition border-b border-white/5 uppercase font-bold">Áreas</a>
-                                <a href="http://chamados.acv" target="_blank" rel="noopener" class="px-5 py-4 hover:bg-white/5 hover:text-white transition border-b border-white/5 uppercase font-bold italic">Solicitar Dados</a>
-                                <a href="https://manualoperacionalacv.lovable.app/" target="_blank" rel="noopener" class="px-5 py-4 hover:bg-white/5 hover:text-white transition uppercase font-bold italic">Fluxograma</a>
-                            </div>
-                        </div>
-                    </div>
+                    <a href="#portal" class="nav-link hover:text-white transition">Dashboards</a>
+                    <button onclick="openSubHub('favoritos')" class="nav-link hover:text-cyan-400 transition uppercase flex items-center gap-1"><i data-lucide="star" class="w-3 h-3"></i> Favoritos</button>
+                    <button onclick="openSubHub('equipe')" class="nav-link hover:text-white transition uppercase">Equipe</button>
+                    <button onclick="requestLogin('clientes')" class="nav-link hover:text-cyan-400 transition uppercase">Cliente</button>
+                    <a href="#areas" class="nav-link hover:text-white transition">Áreas</a>
+                    <a href="http://chamados.acv" target="_blank" rel="noopener" class="nav-link hover:text-white transition italic">Solicitar Dados</a>
+                    <a href="https://manualoperacionalacv.lovable.app/" target="_blank" rel="noopener" class="nav-link hover:text-white transition italic">Fluxograma</a>
                 </div>
 
-                <!-- Botão menu mobile -->
-                <button onclick="toggleMobileMenu()" aria-label="Abrir menu" class="md:hidden text-white p-2">
+                <!-- Botão menu mobile / telas menores -->
+                <button onclick="toggleMobileMenu()" aria-label="Abrir menu" class="lg:hidden text-white p-2">
                     <i data-lucide="menu" class="w-7 h-7"></i>
                 </button>
             </div>
         </nav>
 
         <!-- DRAWER MOBILE -->
-        <div id="mobile-menu" class="fixed top-0 right-0 h-full w-72 z-[60] glass border-l border-white/10 md:hidden pt-24 px-6">
+        <div id="mobile-menu" class="fixed top-0 right-0 h-full w-72 z-[60] glass border-l border-white/10 lg:hidden pt-24 px-6">
             <button onclick="toggleMobileMenu(false)" aria-label="Fechar menu" class="absolute top-6 right-6 text-gray-400 hover:text-white transition">
                 <i data-lucide="x" class="w-7 h-7"></i>
             </button>
