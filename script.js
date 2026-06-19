@@ -38,6 +38,20 @@ const ACESSOS = {
 
 const HUBS = ['juridico', 'financeiro', 'rh', 'diretoria', 'equipe', 'clientes', 'favoritos'];
 
+// Áreas públicas (sem login) e restritas (exigem login)
+const PUBLIC_AREAS = ['equipe', 'favoritos'];
+const RESTRICTED_AREAS = ['juridico', 'financeiro', 'rh', 'diretoria', 'clientes'];
+
+// Áreas já liberadas nesta sessão (para o login não repetir ao usar voltar/avançar)
+const unlocked = new Set();
+try {
+    (JSON.parse(sessionStorage.getItem('acv_unlocked')) || []).forEach(a => unlocked.add(a));
+} catch (_) { /* sem sessionStorage */ }
+function persistUnlocked() {
+    try { sessionStorage.setItem('acv_unlocked', JSON.stringify([...unlocked])); }
+    catch (_) { /* ignora */ }
+}
+
 let targetArea = '';
 
 async function sha256(text) {
@@ -71,6 +85,11 @@ function cancelLogin() {
     screen.classList.remove('visible');
     document.body.classList.remove('no-scroll');
     setTimeout(() => { screen.style.display = 'none'; }, 350);
+    // Se o login foi aberto por link direto (#area-restrita) e não foi liberado, limpa o hash
+    const current = (location.hash || '').replace('#', '');
+    if (RESTRICTED_AREAS.includes(current) && !unlocked.has(current)) {
+        location.hash = '';
+    }
 }
 
 async function validateLogin() {
@@ -82,8 +101,16 @@ async function validateLogin() {
     const hash = await sha256(`${user}:${pass}`);
 
     if (hash === ACESSOS[targetArea]) {
+        unlocked.add(targetArea);
+        persistUnlocked();
+        const area = targetArea;
         cancelLogin();
-        setTimeout(() => openSubHub(targetArea), 200);
+        setTimeout(() => {
+            // Se o hash já aponta para a área (link direto), o hashchange não dispara:
+            // renderiza direto. Caso contrário, muda o hash e o router cuida.
+            if ((location.hash || '').replace('#', '') === area) showArea(area);
+            else location.hash = area;
+        }, 200);
     } else {
         errorMsg.classList.remove('hidden');
         box.classList.remove('shake');
@@ -95,29 +122,58 @@ async function validateLogin() {
 /* --------------------------------------------------------------------------
    4. NAVEGAÇÃO ENTRE SUB-HUBS
    -------------------------------------------------------------------------- */
-function openSubHub(area) {
-    document.getElementById('site-content').style.display = 'none';
-
+// Exibe a home (esconde todos os sub-hubs)
+function showHome() {
     HUBS.forEach(h => {
         const el = document.getElementById(`subhub-${h}`);
         if (el) el.classList.add('hidden');
     });
+    document.getElementById('site-content').style.display = 'block';
+    document.body.classList.remove('no-scroll');
+    renderIcons();
+}
 
+// Exibe um sub-hub específico
+function showArea(area) {
+    document.getElementById('site-content').style.display = 'none';
+    HUBS.forEach(h => {
+        const el = document.getElementById(`subhub-${h}`);
+        if (el) el.classList.add('hidden');
+    });
     const targetEl = document.getElementById(`subhub-${area}`);
     if (targetEl) targetEl.classList.remove('hidden');
 
     if (area === 'favoritos') renderFavoritos();
 
-    renderIcons();           // garante ícones nas seções recém-exibidas
+    renderIcons();
     window.scrollTo(0, 0);
 }
 
-function closeSubHub(area) {
-    const el = document.getElementById(`subhub-${area}`);
-    if (el) el.classList.add('hidden');
-    document.getElementById('site-content').style.display = 'block';
-    document.body.classList.remove('no-scroll');
-    window.scrollTo(0, 0);
+// Roteador: a URL (hash) é a fonte da verdade. Permite voltar/avançar e links diretos.
+function router() {
+    const area = (location.hash || '').replace('#', '').trim();
+
+    // Sem hash, ou âncoras internas da home (#top, #portal, #manifesto...) => home
+    if (!area || !HUBS.includes(area)) { showHome(); return; }
+
+    if (PUBLIC_AREAS.includes(area)) { showArea(area); return; }
+
+    if (RESTRICTED_AREAS.includes(area)) {
+        if (unlocked.has(area)) {
+            showArea(area);
+        } else {
+            showHome();
+            requestLogin(area);   // pede login antes de liberar
+        }
+    }
+}
+window.addEventListener('hashchange', router);
+
+// Chamada pelos botões do HTML — apenas mexe na URL; o router faz o resto.
+function openSubHub(area) { location.hash = area; }
+function closeSubHub() {
+    if (location.hash) location.hash = '';
+    else showHome();
 }
 
 /* --------------------------------------------------------------------------
@@ -391,7 +447,67 @@ function renderFavoritos() {
 }
 
 /* --------------------------------------------------------------------------
-   13. BOOTSTRAP
+   13. BUSCA DE PAINÉIS
+   -------------------------------------------------------------------------- */
+const AREA_LABELS = {
+    'subhub-juridico': 'Jurídico',
+    'subhub-financeiro': 'Financeiro',
+    'subhub-rh': 'RH & Operação',
+    'subhub-diretoria': 'Diretoria',
+    'subhub-clientes': 'Portal do Cliente'
+};
+
+function normalize(s) {
+    return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+}
+
+function buildPanelIndex() {
+    const panels = [];
+    document.querySelectorAll('[id^="subhub-"]:not(#subhub-favoritos):not(#subhub-equipe) .card-portal').forEach(card => {
+        const link = card.querySelector('a[href^="http"]');
+        if (!link) return;
+        const hub = card.closest('[id^="subhub-"]');
+        panels.push({
+            title: (card.querySelector('h3') ? card.querySelector('h3').textContent : 'Painel').trim(),
+            href: link.href,
+            area: AREA_LABELS[hub ? hub.id : ''] || ''
+        });
+    });
+    return panels;
+}
+
+function initSearch() {
+    const input = document.getElementById('painel-search');
+    const results = document.getElementById('search-results');
+    if (!input || !results) return;
+
+    const panels = buildPanelIndex();
+
+    function render(q) {
+        const nq = normalize(q);
+        if (!nq) { results.innerHTML = ''; results.classList.remove('show'); return; }
+        const hits = panels.filter(p => normalize(p.title).includes(nq) || normalize(p.area).includes(nq)).slice(0, 8);
+        if (!hits.length) {
+            results.innerHTML = '<div class="search-empty">Nenhum painel encontrado.</div>';
+        } else {
+            results.innerHTML = hits.map(p =>
+                `<a href="${p.href}" target="_blank" rel="noopener" class="search-item">
+                    <span class="search-item-title">${p.title}</span>
+                    <span class="search-item-area">${p.area}</span>
+                 </a>`).join('');
+        }
+        results.classList.add('show');
+    }
+
+    input.addEventListener('input', () => render(input.value));
+    input.addEventListener('focus', () => { if (input.value) render(input.value); });
+    document.addEventListener('click', (e) => {
+        if (!results.contains(e.target) && e.target !== input) results.classList.remove('show');
+    });
+}
+
+/* --------------------------------------------------------------------------
+   14. BOOTSTRAP
    -------------------------------------------------------------------------- */
 document.addEventListener('DOMContentLoaded', () => {
     renderIcons();
@@ -400,7 +516,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initCountUp();
     initFavorites();
     initTilt();
+    initSearch();
     onScroll();
+    router();          // resolve deep-links / refresh em uma área
 });
 
 /* Expõe funções usadas em atributos onclick do HTML */
