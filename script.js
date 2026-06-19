@@ -529,3 +529,12 @@ window.openSubHub = openSubHub;
 window.closeSubHub = closeSubHub;
 window.toggleMobileMenu = toggleMobileMenu;
 window.scrollToTop = scrollToTop;
+
+/* --------------------------------------------------------------------------
+   15. SERVICE WORKER (PWA) — habilita instalação e funcionamento offline
+   -------------------------------------------------------------------------- */
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(() => { /* sem PWA neste ambiente */ });
+    });
+}
