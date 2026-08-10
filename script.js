@@ -99,7 +99,8 @@ async function validateLogin() {
     const box = document.querySelector('.login-box');
 
     const hash = await sha256(`${user}:${pass}`);
-
+    
+    console.log(hash)
     if (hash === ACESSOS[targetArea]) {
         unlocked.add(targetArea);
         persistUnlocked();
